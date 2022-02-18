@@ -17,7 +17,7 @@ public class MyFourthThread extends Thread {
 		long start = System.nanoTime();
 		computePrimeFactors(values);
 		long end = System.nanoTime();
-		System.out.println("Letra e) - Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
+		System.out.println("Letra e) - Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)) + "ns");
 	}
 
 	public static int[] computePrimeFactors(int[] values) { 

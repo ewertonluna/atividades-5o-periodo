@@ -27,26 +27,26 @@ public class Main {
 		myThread3.start();
 		myThread3.join();
 		long end = System.nanoTime();
-		System.out.println("Letra b) - Runtime de computePrimeFactors na thread principal: " + ((end - start)));
+		System.out.println("Letra b) - Runtime de computePrimeFactors na thread principal: " + ((end - start)) + "ns");
 		// ** Fim da letra b ** 
 
 
 		// ** Início da letra c ** 
 		MyThirdThread myThread4 = new MyThirdThread(4);
 		long tempoDeOverhead = getTempoDeOverheadDaLetraC(myThread4);
-		System.out.println("Letra c) Tempo de overhead: " + tempoDeOverhead);
+		System.out.println("Letra c) Tempo de overhead: " + tempoDeOverhead + "ns");
 		// ** Fim da letra c **
 
 
 		// ** Implementação da letra D está no método partitionData abaixo. ** 
-		System.out.println("Letra d) - Por favor, olhar o código para ver implementação.");
+		System.out.println("Letra d) - Por favor, olhar o código para ver implementação de partitionData.");
 
 
 		// ** Início da letra E ** 
 		final int numberOfThreads = 4;
 		final int workLoad = 3; 
 		int[] numArray = getIntegerArray(numberOfThreads * workLoad);
-
+		System.out.println("Letra e) - O número de Threads que serão usadas é " + numberOfThreads + ". Cada Thread terá um workload de " + workLoad + ". Para alterar esses valores, basta modificar o valor das variáveis 'numberOfThread' e 'workLoad'");
 		for (int i = 0; i < numberOfThreads; i++) {
 			int[] localNumArray = partitionData(numArray, i * workLoad, workLoad * (i + 1) - 1);
 			MyFourthThread myThread = new MyFourthThread(localNumArray, i);
