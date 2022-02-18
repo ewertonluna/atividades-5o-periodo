@@ -3,18 +3,24 @@ public class Main {
 	static public void main(String[] args) throws InterruptedException {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
-		MyOtherThread myThread3 = new MyOtherThread();
-		MyOtherThread myThread4 = new MyOtherThread();
+		MyFirstThread myThread1 = new MyFirstThread(1);
+		MyFirstThread myThread2 = new MyFirstThread(2);
 
+		myThread1.run();
+		myThread1.join();
+		myThread2.run();
+		myThread2.join();
+
+		MySecondThread myThread3 = new MySecondThread(numbers, 3);
+
+		long start = System.nanoTime();
 		myThread3.run();
 		myThread3.join();
-		myThread4.run();
-		myThread4.join();
+		long end = System.nanoTime();
+		System.out.println("Runtime de computePrimeFactors na thread principal: " + ((end - start)));
 		
-		// Start clock
-		int[] computedNumbers = computePrimeFactors(numbers);
-		// End clock
 
+		
 		
 	}
 

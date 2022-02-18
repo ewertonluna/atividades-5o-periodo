@@ -1,16 +1,25 @@
 package app;
 import java.lang.Runnable;
 
-public class MyThread implements Runnable{
-	private String message;
+/**
+ * Essa classe de Thread é usada com o intuito de saber o tempo
+ * de execução do método computePrimeFactors dentro da Thread.
+ */
+public class MySecondThread extends Thread {
+	private int[] values;
+	private int id;
 
-	public MyThread(String message) {
-		this.message = message;
+	MySecondThread(int[] values, int id) {
+		this.values = values;
+		this.id = id;
 	}
 
 	@Override
 	public void run() {
-		System.out.println(message);
+		long start = System.nanoTime();
+		computePrimeFactors(values);
+		long end = System.nanoTime();
+		System.out.println("Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
 	}
 
 	public static int[] computePrimeFactors(int[] values) { 
