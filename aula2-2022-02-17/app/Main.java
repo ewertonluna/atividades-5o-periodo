@@ -1,4 +1,10 @@
 package app;
+
+import app.thread.MyFirstThread;
+import app.thread.MyFourthThread;
+import app.thread.MySecondThread;
+import app.thread.MyThirdThread;
+
 public class Main {
 	static public void main(String[] args) throws InterruptedException {
 		int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

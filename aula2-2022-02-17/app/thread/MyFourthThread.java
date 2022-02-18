@@ -1,13 +1,13 @@
-package app;
+package app.thread;
 
 /**
- * Essa classe é usada para letra b
+ * Essa classe é usada para letra e
  */
-public class MySecondThread extends Thread {
+public class MyFourthThread extends Thread {
 	private int[] values;
 	private int id;
 
-	MySecondThread(int[] values, int id) {
+	public MyFourthThread(int[] values, int id) {
 		this.values = values;
 		this.id = id;
 	}
@@ -17,7 +17,7 @@ public class MySecondThread extends Thread {
 		long start = System.nanoTime();
 		computePrimeFactors(values);
 		long end = System.nanoTime();
-		System.out.println("Letra b) - Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
+		System.out.println("Letra e) - Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
 	}
 
 	public static int[] computePrimeFactors(int[] values) { 
@@ -41,3 +41,5 @@ public class MySecondThread extends Thread {
 		 
 	
 }
+
+

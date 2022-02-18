@@ -1,4 +1,4 @@
-package app;
+package app.thread;
 
 /**
  * Essa classe é usada para letra a
@@ -6,7 +6,7 @@ package app;
 public class MyFirstThread extends Thread {
 	private int id;
 
-	MyFirstThread(int id) {
+	public MyFirstThread(int id) {
 		this.id = id;
 	}
 
