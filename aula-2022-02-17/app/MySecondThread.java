@@ -1,9 +1,7 @@
 package app;
-import java.lang.Runnable;
 
 /**
- * Essa classe de Thread é usada com o intuito de saber o tempo
- * de execução do método computePrimeFactors dentro da Thread.
+ * Essa classe é usada para letra b
  */
 public class MySecondThread extends Thread {
 	private int[] values;
@@ -19,7 +17,7 @@ public class MySecondThread extends Thread {
 		long start = System.nanoTime();
 		computePrimeFactors(values);
 		long end = System.nanoTime();
-		System.out.println("Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
+		System.out.println("Letra b) - Runtime de computePrimeFactors na thread " + id + " foi de " + ((end - start)));
 	}
 
 	public static int[] computePrimeFactors(int[] values) { 

@@ -1,5 +1,8 @@
 package app;
 
+/**
+ * Essa classe é usada para c
+ */
 public class MyThirdThread extends Thread{
 	private int id;
 
@@ -9,7 +12,6 @@ public class MyThirdThread extends Thread{
 
 	@Override
 	public void run() {
-		
 	}
 
 	
