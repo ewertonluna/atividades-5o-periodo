@@ -1,0 +1,1 @@
+a) Sim. As mensagens foram impressas no console de maneira desordenada.
