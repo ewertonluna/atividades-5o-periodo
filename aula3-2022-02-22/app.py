@@ -25,13 +25,26 @@ def num_prime_factors(number):
 	return prime_factors
 
 if __name__ == '__main__':
+	# ** Início da letra a **
 	for i in range(10):
 		my_first_thread = MyFirstThread(i)
-		my_first_thread.start() # Letra a
+		my_first_thread.start() 
+	# ** Fim da letra a **
 
+	# ** Início da letra b **
 	array_letra_a = get_int_array(10)
 	start = time.time()
 	my_second_process = MySecondProcess(1, array_letra_a)
 	my_second_process.start()
 	end = time.time()
-	print(f"Letra b) Tempo de execução fora do processo: {end - start}s")
+	print(f"Letra b) Tempo de execução no processo principal: {end - start}s")
+	# ** Fim da letra b **	
+
+	# ** Início da letra c **
+	# ** Fim da letra c **	
+
+	# ** Início da letra d **
+	# ** Fim da letra d **	
+
+	# ** Início da letra e **
+	# ** Fim da letra e **	
