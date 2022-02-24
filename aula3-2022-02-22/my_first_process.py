@@ -1,7 +1,7 @@
 from multiprocessing import Process
 from unicodedata import name
 
-class MyFirstThread(Process):
+class MyFirstProcess(Process):
 	def __init__(self, id):
 		Process.__init__(self)
 		self.id = id

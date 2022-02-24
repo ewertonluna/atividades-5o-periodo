@@ -1,5 +1,5 @@
 import time
-from my_first_thread import MyFirstThread
+from my_first_process import MyFirstProcess
 from my_second_process import MySecondProcess
 from my_third_process import MyThirdProcess
 from my_fourth_process import MyFourthProcess
@@ -29,8 +29,8 @@ def num_prime_factors(number):
 if __name__ == '__main__':
 	# ** Início da letra a **
 	for i in range(10):
-		my_first_thread = MyFirstThread(i)
-		my_first_thread.start() 
+		my_first_process = MyFirstProcess(i)
+		my_first_process.start() 
 	# ** Fim da letra a **
 
 	# ** Início da letra b **
