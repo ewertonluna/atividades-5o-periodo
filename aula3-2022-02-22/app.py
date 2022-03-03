@@ -31,6 +31,7 @@ if __name__ == '__main__':
 	for i in range(10):
 		my_first_process = MyFirstProcess(i)
 		my_first_process.start() 
+		my_first_process.join()
 	# ** Fim da letra a **
 
 	# ** Início da letra b **
