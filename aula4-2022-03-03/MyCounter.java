@@ -1,4 +1,4 @@
 public interface MyCounter {
-	void increment();
-	int getValue();
+	public void increment();
+	public int getValue();
 }

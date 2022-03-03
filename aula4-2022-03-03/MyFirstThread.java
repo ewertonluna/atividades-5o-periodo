@@ -1,7 +1,9 @@
 public class MyFirstThread extends Thread {
 	private MyCounter myCounter;
+	private int id;
 
-	public MyFirstThread(MyCounter myCounter) {
+	public MyFirstThread(int id, MyCounter myCounter) {
+		this.id = id;
 		this.myCounter = myCounter;
 	}
 
