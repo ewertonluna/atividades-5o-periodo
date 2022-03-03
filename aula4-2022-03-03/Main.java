@@ -1,5 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IllegalMonitorStateException {
 		// // ** Início da letra b ** 
 		// MyCounter myCounter = new SequentialCounter();
 		// MyFirstThread myFirstThread = new MyFirstThread(0, myCounter);
@@ -43,17 +46,28 @@ public class Main {
 		// System.out.println("Value: " + safeCounter2.getValue());
 		// // Fim Letra d
 
-		MyCounter safeCounter3 = new SafeSequentialCounter();
-		for (int i = 0; i < 10; i++) {
-			MyThirdThread myThread = new MyThirdThread(i, safeCounter3);
-			myThread.start();
-		}
+		// MyCounter safeCounter3 = new SafeSequentialCounter();
+		// for (int i = 0; i < 10; i++) {
+		// 	MyThirdThread myThread = new MyThirdThread(i, safeCounter3);
+		// 	myThread.start();
+		// }
 
 		/**
 		 * [thread1, thread2, thread3, thread4]
 		 * [thread1.wait(), thread2.wait(), thread3.wait(), thread4.wait()]
 		 * Thread1(0, myCounter, lista[i + 1]) 
 		 */
+
+		// ** Início da letra F **
+		MyCounter safeCounter4 = new SafeSequentialCounter();
+		List<Thread> listOfThreads = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			MyThirdThread myThread = new MyThirdThread(i, safeCounter4);
+			listOfThreads.add(myThread);
+		}
+		
+		// ** Fim da letra F **
+
 	
 	}
 }
