@@ -1,4 +1,5 @@
-public class SequentialCounter implements MyCounter {
+package counter;
+public class SequentialCounter implements ICounter {
 	int value = 0;
 	
 	@Override
