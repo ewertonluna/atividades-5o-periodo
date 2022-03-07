@@ -4,7 +4,7 @@
 Solução: Olhar a implementação da classe SequentialCounter
 ### Letra b
 O valor final de getValue() é 1000, pois estamos imprimindo o valor de getValue() depois que o método Thread.join(), isso garante que a execução da Thread termina antes que o valor de getValue seja impresso no standardout. 
-Caso Thread.joi() não fosse chamada antes da impressão do valor, o valor final (impresso) poderia ter um valor aleatório entre 0 e 1000.
+Caso Thread.join() não fosse chamada antes da impressão do valor, o valor final (impresso) poderia ter um valor aleatório entre 0 e 1000.
 Isso acontece por que não há garantias de quantas vezes o método increment() seria chamado até que o valor fosse printado.
 
 ### Letra c
