@@ -13,7 +13,10 @@ public class MySecondThread extends Thread {
 
 	@Override
 	public void run() {
+		long start = System.nanoTime();
 		myCounter.increment();
+		long end = System.nanoTime();
+		System.out.println("Letra d) Runtime da execução de run() da Thread é de " + (end - start) + "ns");
 	}
 
 	public ICounter getMyCounter() {
