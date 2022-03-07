@@ -1,4 +1,4 @@
-# Exercício 3
+# Exercício 4
 ## Grupo: Carolina Vasconcelos, Ewerton Luna, Marcela Cavalcante, Mariana Coutinho
 ### Letra a
 Solução: Olhar a implementação da classe SequentialCounter
