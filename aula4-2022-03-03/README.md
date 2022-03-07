@@ -18,5 +18,8 @@ Para os dois tópicos seguintes, checar os valores que são logados ao executar 
 Como o tempo medido fora do método run() da Thread não necessariamente cronometra o tempo de execução, fizemos a medição do tempo dentro da Thread.
 Favor, olhar o código de MainLetraD, MySecondCounter e SafeSequentialCounter.
 ### Letra e
-Solução demonstrada através do código.
+Não há padrão. Apesar de o synchronized usado dentro da classe SafeSequentialCounter, a keyword garante apenas que duas threads não irão chamar o método ao mesmo tempo. Porém, não há garantias sobre a ordem que elas executam.
 ### Letra f
+Olhar a implementação em MainLetraF.java, FairSynchronizedCounter.java e MyFourthThread.java.
+PS: Na nossa implementação, fizemos o round robin executar indefinidamente 3 rounds. É possível modificar a quantidade de rounds que o round robin irá ter, apenas alterando a variável i que fica dentro do loop while
+contido no método run() da classe MyFourthThread.java

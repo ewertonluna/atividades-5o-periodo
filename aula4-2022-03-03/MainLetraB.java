@@ -10,7 +10,7 @@ public class MainLetraB {
 		myFirstThread.start();
 		myFirstThread.join();
 		int value1 = myCounter.getValue();
-		System.out.println("Value: " + value1);
+		System.out.println("Letra b) Value: " + value1);
 		// ** Fim da letra b ** 
 	}
 }

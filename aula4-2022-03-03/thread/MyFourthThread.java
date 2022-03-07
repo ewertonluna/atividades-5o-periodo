@@ -11,8 +11,10 @@ public class MyFourthThread extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		int i = 0;
+		while (i < 3) {
 			counter.increment();
+			i++;
 		}
 	}
 	

@@ -1,15 +1,6 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import counter.FairSynchronizedCounter;
 import counter.ICounter;
 import counter.SafeSequentialCounter;
-import counter.SequentialCounter;
-import thread.MyFirstThread;
-import thread.MyFourthThread;
 import thread.MySecondThread;
-import thread.MyThirdThread;
 
 public class MainLetraD {
 	public static void main(String[] args) throws InterruptedException, IllegalMonitorStateException {

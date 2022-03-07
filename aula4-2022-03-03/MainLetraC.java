@@ -13,7 +13,7 @@ public class MainLetraC {
 		}
 
 		int value2 = mySecondCounter.getValue();
-		System.out.println("Value: " + value2);
+		System.out.println("Letra c) Value: " + value2);
 		// ** Fim da letra c ** 
 	}
 		
