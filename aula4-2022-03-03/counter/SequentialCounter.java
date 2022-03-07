@@ -1,4 +1,6 @@
 package counter;
+
+// Solução da letra A'
 public class SequentialCounter implements ICounter {
 	int value = 0;
 	

@@ -1,4 +1,6 @@
 package counter;
+
+// Solução da letra C
 public class SafeSequentialCounter implements ICounter {
 	int value = 0;
 

@@ -14,7 +14,7 @@ public class MyThirdThread extends Thread {
 	@Override
 	public void run() {
 		myCounter.increment();
-		System.out.println("ID da thread: " + ID);
+		System.out.println("ID da thread: " + ID); // Solução da letra E
 	}
 	
 	public int getID() {
