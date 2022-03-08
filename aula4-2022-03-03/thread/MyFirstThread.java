@@ -13,9 +13,12 @@ public class MyFirstThread extends Thread {
 
 	@Override
 	public void run() {
+		long start = System.nanoTime();
 		for (int i = 0; i < 1000; i++) {
 			myCounter.increment();
 		}
+		long end = System.nanoTime();
+	System.out.println("Runtime da execução de run() da Thread é de " + (end - start) + "ns");
 	}
 
 	public int getID() {
