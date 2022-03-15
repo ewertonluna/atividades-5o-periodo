@@ -53,6 +53,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
+		// ** Sete o boolean de server.start() abaixo como false para execução da letra b e como true para execução da letra c.
         server.start(8888, false);
     }
 }
