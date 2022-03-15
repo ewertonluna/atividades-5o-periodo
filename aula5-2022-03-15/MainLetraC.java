@@ -11,11 +11,11 @@ public class MainLetraC {
 	public static void main(String[] args) throws UnknownHostException, IOException {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Entre com a quantidade de números que você deseja solicitar do servidor: ");
-		scanner.nextLine();
+		int quantity = scanner.nextInt();
 		Client client = new Client();
 		client.startConnection("127.0.0.1", 8888);
-		client.askNumbers(10);
-		client.logNumbers(10);
+		client.askNumbers(quantity);
+		client.logNumbers(quantity);
 		scanner.close();
 	}
 }

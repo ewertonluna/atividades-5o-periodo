@@ -46,7 +46,7 @@ public class Server {
 		int[] numbers = new int[n];
 		Random random = new Random();
 		for (int i = 0; i < numbers.length; i++) {
-			numbers[i] = random.nextInt(10);
+			numbers[i] = random.nextInt(100);
 		}
 		return numbers;
 	}
@@ -54,6 +54,6 @@ public class Server {
     public static void main(String[] args) throws IOException {
         Server server = new Server();
 		// ** Sete o boolean de server.start() abaixo como false para execução da letra b e como true para execução da letra c.
-        server.start(8888, false);
+        server.start(8888, true);
     }
 }
