@@ -6,6 +6,8 @@
 Para executar MainLetraC, certifique-se que o método `start` que há no corpo do método main da classe `server.Server` recebe como segundo argumento o booleano true.<br>
 Esses valores de booleano são para setar a flag `isInputInteger` que determina se o servidor irá ouvir por inteiros ou não.
 
+## Solução
+
 ### Letra a
 Solução: Olhar a implementação da classe `server.Server`
 
