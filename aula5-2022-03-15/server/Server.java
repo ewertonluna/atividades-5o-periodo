@@ -28,6 +28,7 @@ public class Server {
 			}
 		} else {
 			String greeting = in.readLine();
+			System.out.println("Message received from client: " + greeting);
 			out.println("Hi, client. This was your message: " + greeting);
 		}
     }
