@@ -16,5 +16,6 @@ public class MainLetraB {
 		String message = scanner.nextLine();
 		String response = client.sendMessage(message);
 		System.out.println("Resposta devolvida do servidor: '" + response + "'");
+		scanner.close();
 	}
 }

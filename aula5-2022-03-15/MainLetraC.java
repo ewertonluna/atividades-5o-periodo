@@ -9,10 +9,13 @@ import client.Client;
 // * por um tipo inteiro.
 public class MainLetraC {
 	public static void main(String[] args) throws UnknownHostException, IOException {
-		// Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Entre com a quantidade de números que você deseja solicitar do servidor: ");
+		scanner.nextLine();
 		Client client = new Client();
 		client.startConnection("127.0.0.1", 8888);
 		client.askNumbers(10);
 		client.logNumbers(10);
+		scanner.close();
 	}
 }
