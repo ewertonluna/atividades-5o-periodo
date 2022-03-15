@@ -10,12 +10,12 @@ Esses valores de booleano são para setar a flag `isInputInteger` que determina 
 Solução: Olhar a implementação da classe `server.Server`
 
 ### Letra b
-* **Certifique-se que o método `start` que há no corpo do método main da classe `server.Server` recebe como segundo argumento o booleano false. Quando o booleano do start do servidor está como false, indica que ele irá esperar por uma string do cliente. **
+* **Certifique-se que o método `start` que há no corpo do método main da classe `server.Server` recebe como segundo argumento o booleano false. Quando o booleano do start do servidor está como false, indica que ele irá esperar por uma string do cliente.**
 * Execute o main da classe `server.Server`  
 * Execute o main da classe `MainLetraB`
 
 ### Letra c
-* **Certifique-se que o método `start` que há no corpo do método main da classe server.Server recebe como segundo argumento o booleano true. Quando o booleano do start do servidor está como true, indica que ele irá esperar por um inteiro do cliente. **
+* **Certifique-se que o método `start` que há no corpo do método main da classe server.Server recebe como segundo argumento o booleano true. Quando o booleano do start do servidor está como true, indica que ele irá esperar por um inteiro do cliente.**
 * Execute o main da classe server.Server
 * Execute o main da classe MainLetraC
 
