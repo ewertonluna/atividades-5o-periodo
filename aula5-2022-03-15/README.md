@@ -22,5 +22,5 @@ Solução: Olhar a implementação da classe `server.Server`
 ### Letra d
 A abordagem utilizada foi através das classes `DataInputStream` e `DataOutputStream` que permite uma aplicação ler e escrever tipos primitivos em Java a partir de uma input stream subjacente. <br>
 A primeira mensagem que o cliente enviou para o servidor, nesse caso, foi a quantidade de números que queria-se que o servidor gerasse.<br>
-No lado do servidor, a partir do momento que ele lê a quantidade de números que o cliente deseja, ele cria um array com valores aleatórios e devolve para o cliente, escrevendo cada valor do array no dataOutputStream.<br>
+No lado do servidor, a partir do momento que ele lê a quantidade de números que o cliente deseja, ele cria um array com valores aleatórios e devolve para o cliente, escrevendo cada valor do array no `dataOutputStream`.<br>
 O cliente quando recebe, imprime os valores recebidos no standard out.
