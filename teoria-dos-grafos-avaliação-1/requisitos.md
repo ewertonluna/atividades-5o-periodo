@@ -5,11 +5,9 @@
 
 ## Pontuação
 
-- ## 0.5 - Requisito surpresa a ser divulgado 48 horas antes do prazo final
+- 1.0 - Interação do usuário para criar um grafo inserindo um item de cada vez (vértices e arestas)
 
-- 1.0 - Interação com o usuário,  inserindo um item de cada vez (vértices e arestas)
-
-- 1.0 - Inserindo as informações em lote tudo de uma vez só, como um arquivo ou um grande string com as informações de todos os vértices e arestas
+- 1.0 - Interação do usuário inserindo as informações em lote tudo de uma vez só, como um arquivo ou um grande string com as informações de todos os vértices e arestas
 - 0.5 - O usuário poderá criar grafos direcionados ou não-direcionados, e grafos valorados ou não-valorados 
 - 1.0 - imprimir/visualizar o grafo
     - formato livre a ser definido pelo grupo, poder ser textual como uma lista de adjacência, matriz de adjacência, etc. Ou gráfico como imagem na tela ou download de arquivo de imagem
@@ -23,3 +21,5 @@
     - Valor do custo do menor caminho entre os dois vértices como a 
     - Sequência de vértices deste menor caminho
     - Não há arestas com pesos negativos
+
+- ## 0.5 - Requisito surpresa a ser divulgado 48 horas antes do prazo final
