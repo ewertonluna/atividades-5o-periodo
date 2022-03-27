@@ -86,10 +86,10 @@ class Graph:
 
 
 # Testing
-# graph = Graph()
-# graph.add_vortex('a')
-# graph.add_vortex('b')
-# graph.add_edge('1', ('a', 'b'))
-# graph.add_vortex('c')
-# graph.add_edge('2', ('b', 'c'))
-# print(graph)
+graph = Graph()
+graph.add_vortex('a')
+graph.add_vortex('b')
+graph.add_edge('1', ('a', 'b'))
+graph.add_vortex('c')
+graph.add_edge('2', ('b', 'c'))
+print(graph)
