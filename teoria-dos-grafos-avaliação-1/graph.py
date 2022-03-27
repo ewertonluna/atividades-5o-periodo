@@ -10,7 +10,7 @@ class Graph:
 		self.vertices: Dict[str, Vortex] = dict()
 		self.edges: Dict[str, Edge] = dict()
 	
-	def add_vortex(self, vortex_label: str):
+	def add_vortex(self, label: str):
 		"""
 		Adds vortex to the Graph
 
@@ -22,10 +22,10 @@ class Graph:
 	
 		"""
 
-		vortex = Vortex(vortex_label)
+		vortex = Vortex(label)
 		self.vertices[vortex.label] = vortex
 	
-	def add_edge(self, edge_label: str, connected_vertices: Union[Tuple[str, str], Set[str]]):
+	def add_edge(self, label: str, connected_vertices: Union[Tuple[str, str], Set[str]], weight: float=0):
 		"""
 		Adds edge to the Graph
 
@@ -43,9 +43,10 @@ class Graph:
 			if not self.has_vertice(vertice_label):
 				raise GraphException(f"The edge is connected to a vertice that doesn't exist: (vertice label: '{vertice_label}')")
 
-		edge = Edge(edge_label, self.is_directed)
+		edge = Edge(label, self.is_directed)
 		try:
 			edge.add_connected_vertices_pair(connected_vertices)
+			edge.set_weight(weight)
 		except EdgeException as e:
 			raise GraphException('Error adding edge: ' + str(e))
 
@@ -86,10 +87,10 @@ class Graph:
 
 
 # Testing
-graph = Graph()
-graph.add_vortex('a')
-graph.add_vortex('b')
-graph.add_edge('1', ('a', 'b'))
-graph.add_vortex('c')
-graph.add_edge('2', ('b', 'c'))
-print(graph)
+# graph = Graph()
+# graph.add_vortex('a')
+# graph.add_vortex('b')
+# graph.add_edge('1', ('a', 'b'), 10)
+# graph.add_vortex('c')
+# graph.add_edge('2', ('b', 'c'))
+# print(graph)

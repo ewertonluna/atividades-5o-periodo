@@ -6,6 +6,7 @@ class Edge:
 
 	def __init__(self, label, is_directed=False) :
 		self.label = label
+		self.weight = 0
 		self.is_directed = is_directed
 		self.connected_vertices = tuple() if is_directed else set() 
 
@@ -58,9 +59,16 @@ class Edge:
 				result = "The vertices' labels cannot be the same"
 
 		return result
+	
+	def set_weight(self, weight: float):
+		if weight is None:
+			raise EdgeException("Must provide a value for 'weight'.")
+		if weight < 0:
+			raise EdgeException("'weight' value has to be bigger than or equals to zero")
+		self.weight = float(weight)
 
 	def __repr__(self):
-		return f'Edge[label: "{self.label}", is_directed: "{self.is_directed}", connected_vertices: "{self.connected_vertices}]"'
+		return f'Edge[label: "{self.label}", weight: "{self.weight}", is_directed: "{self.is_directed}", connected_vertices: "{self.connected_vertices}]"'
 
 
 
