@@ -10,7 +10,7 @@ class Edge:
 		self.is_directed = is_directed
 		self.connected_vertices = tuple() if is_directed else set() 
 
-	def add_connected_vertices_pair(self, vertices: Union[Tuple[str, str], Set[str]]):
+	def set_connected_vertices(self, vertices: Union[Tuple[str, str], Set[str]]):
 		"""
 		Adds pair of vertices to the edge instance.
 

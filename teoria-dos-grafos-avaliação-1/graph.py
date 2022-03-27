@@ -45,10 +45,12 @@ class Graph:
 
 		edge = Edge(label, self.is_directed)
 		try:
-			edge.add_connected_vertices_pair(connected_vertices)
+			edge.set_connected_vertices(connected_vertices)
 			edge.set_weight(weight)
 		except EdgeException as e:
 			raise GraphException('Error adding edge: ' + str(e))
+		except Exception as e:
+			raise GraphException('General exception:' + str(e))
 
 		for vertice_label in connected_vertices:
 			vortex = self.vertices[vertice_label]	
@@ -67,6 +69,7 @@ class Graph:
 		bool: True if the vortex exists in the graph, False otherwise.
 	
 		"""
+
 		return vortex_label in self.vertices.keys()
 	
 	def __repr__(self) -> str:
