@@ -1,5 +1,7 @@
 from typing import Dict
 from edge import Edge
+from vortex_exception import VortexException
+
 class Vortex:
 	def __init__(self, label: str):
 		self.label = label
@@ -17,12 +19,14 @@ class Vortex:
 	
 		"""
 		if not isinstance(edge, Edge):
-			raise ValueError("'edge' must be an instance of Edge")
+			raise VortexException("'edge' must be an instance of Edge")
 
 		self.adjacent_edges[edge.label] = edge
 	
 	def __repr__(self):
 		return f'Vortex[label: "{self.label}", adjacent_edges: "{self.adjacent_edges}]"'
+
+
 
 
 # Testing

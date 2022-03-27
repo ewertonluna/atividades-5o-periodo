@@ -1,6 +1,6 @@
 from typing import Set, Tuple
 from typing import Union
-
+from edge_exception import EdgeException
 
 class Edge:
 
@@ -23,7 +23,7 @@ class Edge:
 
 		vertices_validation_message = self.get_vertices_validation_message(vertices)
 		if vertices_validation_message:
-			raise ValueError(vertices_validation_message)
+			raise EdgeException(vertices_validation_message)
 
 		if self.is_directed:
 			vertices = tuple(vertices)
@@ -63,7 +63,9 @@ class Edge:
 		return f'Edge[label: "{self.label}", is_directed: "{self.is_directed}", connected_vertices: "{self.connected_vertices}]"'
 
 
+
+
 # Testing
 # edge = Edge('a', True)
-# edge.add_connected_vertices_pair(('a', 'b', 'c'))
+# edge.add_connected_vertices_pair(('a', 'a'))
 # print(edge.connected_vertices)
