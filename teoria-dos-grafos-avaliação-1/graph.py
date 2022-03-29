@@ -74,6 +74,7 @@ class Graph:
 	
 	def __repr__(self) -> str:
 		repr = "Graph[\n" \
+			f"\tis_directed: {self.is_directed}\n" \
 			f"\tvertices: \n"
 
 		for vortex in self.vertices.values():
