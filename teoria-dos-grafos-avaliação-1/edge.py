@@ -52,6 +52,9 @@ class Edge:
 		
 		if len(vertices) != 2:
 			result = "Length of 'vertices' has to be exactly 2."
+		elif isinstance(vertices, set):
+			# TODO: Continuar escrevendo o método
+			pass
 		else:
 			label_1, label_2 = vertices
 			
