@@ -26,30 +26,35 @@ class Menu:
 			if option == '1':
 				is_directed = True
 			
-			graph = Graph(is_directed)
+			self.graph = Graph(is_directed)
 			run = False
+		self._add_vertices()
+		# self.add_edges()
 
 
-	def add_vertices(self):
+	def _add_vertices(self):
 		print("** Adição de Vértices **")
 
-		self.graph = Graph(True)
-		
-		run = True
-		while run:
-			label = input("Label do vértice [digite 'sair' p/ concluir] >>> ")
+		if self.graph is None:
+			print("Primeiro é preciso criar o grafo. Tente novamente.")
+		else:
+			run = True
+			while run:
+				label = input("Entre c/ a label do vértice [digite 'sair' p/ concluir] >>> ")
 
-			if label.lower().strip() == 'sair':
-				break
+				if label.lower().strip() == 'sair':
+					break
 
-			vortex = Vortex(label)
-			try:
-				self.graph.add_vortex(vortex)
-			except GraphException as e:
-				print("Erro ao adicionar vértice " + str(e))
-			print(f"Vértice de label '{label}' adicionado com sucesso!")
-			
+				vortex = Vortex(label)
+				try:
+					self.graph.add_vortex(vortex)
+				except GraphException as e:
+					print("Erro ao adicionar vértice " + str(e))
+					continue
+				print(f"Vértice de label '{label}' adicionado com sucesso!")
+				
 
-menu = Menu()
-menu.add_vertices()
+# Testing
+# menu = Menu()
+# menu.create_graph()
 		
