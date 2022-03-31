@@ -51,10 +51,11 @@ class Edge:
 		result = ""
 		
 		if len(vertices) != 2:
-			result = "Length of 'vertices' has to be exactly 2."
-		elif isinstance(vertices, set):
-			# TODO: Continuar escrevendo o método
-			pass
+			result += "Length of 'vertices' has to be exactly 2. "
+		elif self.is_directed and isinstance(vertices, set):
+			result += "The vertices need to be a tuple, not a set since the edge is directed. "
+		elif not self.is_directed and isinstance(vertices, tuple):
+			result += "The vertices need to be a set, not a tuple since the edge isn't directed. "
 		else:
 			label_1, label_2 = vertices
 			
@@ -63,12 +64,14 @@ class Edge:
 
 		return result
 	
+
 	def set_weight(self, weight: float):
 		if weight is None:
 			raise EdgeException("Must provide a value for 'weight'.")
 		if weight < 0:
 			raise EdgeException("'weight' value has to be bigger than or equals to zero")
 		self.weight = float(weight)
+
 
 	def __repr__(self):
 		return f'Edge[label: "{self.label}", weight: "{self.weight}", is_directed: "{self.is_directed}", connected_vertices: "{self.connected_vertices}]"'
@@ -77,6 +80,7 @@ class Edge:
 
 
 # Testing
-# edge = Edge('a', True)
-# edge.add_connected_vertices_pair(('a', 'a'))
-# print(edge.connected_vertices)
+edge = Edge('a', True)
+edge.set_connected_vertices({'a', 'b'})
+print(edge.connected_vertices)
+
