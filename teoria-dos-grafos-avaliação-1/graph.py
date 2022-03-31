@@ -47,7 +47,7 @@ class Graph:
 		try:
 			edge.set_connected_vertices(connected_vertices)
 			edge.set_weight(weight)
-		except EdgeException as e:
+		except (EdgeException, ValueError) as e:
 			raise GraphException('Error adding edge: ' + str(e))
 		except Exception as e:
 			raise GraphException('General exception:' + str(e))
