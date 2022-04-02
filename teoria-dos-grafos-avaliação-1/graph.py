@@ -46,8 +46,8 @@ class Graph:
 		edge = Edge(label, self.is_directed)
 		try:
 			edge.set_connected_vertices(connected_vertices)
-			edge.set_weight(weight)
-		except EdgeException as e:
+			edge.set_weight(float(weight))
+		except (EdgeException, ValueError) as e:
 			raise GraphException('Error adding edge: ' + str(e))
 		except Exception as e:
 			raise GraphException('General exception:' + str(e))

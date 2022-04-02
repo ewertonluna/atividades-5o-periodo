@@ -60,7 +60,7 @@ class Edge:
 			label_1, label_2 = vertices
 			
 			if label_1 == label_2:
-				result = "The vertices' labels cannot be the same"
+				result += "The vertices' labels cannot be the same"
 
 		return result
 	
@@ -74,13 +74,13 @@ class Edge:
 
 
 	def __repr__(self):
-		return f'Edge[label: "{self.label}", weight: "{self.weight}", is_directed: "{self.is_directed}", connected_vertices: "{self.connected_vertices}]"'
+		return f'Edge[label: "{self.label}", weight: {self.weight}, is_directed: {self.is_directed}, connected_vertices: {self.connected_vertices}]'
 
 
 
 
 # Testing
-edge = Edge('a', True)
-edge.set_connected_vertices({'a', 'b'})
-print(edge.connected_vertices)
+# edge = Edge('a', True)
+# edge.set_connected_vertices({'a', 'b'})
+# print(edge.connected_vertices)
 
