@@ -32,6 +32,7 @@ class Menu:
 			run = False
 		self._add_vertices()
 		self._add_edges()
+		print(self.graph)
 
 
 	def _add_vertices(self):
@@ -55,9 +56,6 @@ class Menu:
 				print(f"Vértice de label '{label}' adicionado com sucesso!")
 				
 
-	# TODO: 
-	# Existe bug nesse ou em outros métodos. Mesmo inserido os vértices e colocando as arestas conectando vértices válidos
-	# está acontecendo mensagem de erro imprópria.
 	def _add_edges(self):
 		print("** Adição de Arestas **")
 		if self.graph is None:
@@ -73,7 +71,7 @@ class Menu:
 				connected_vertices = None
 				if self.graph.is_directed:
 					starting_vortex = input(f"Entre c/ a label do vértice de onde a aresta '{label}' sai >>> ")
-					arrival_vortex = input(f"Entre c/ a label do vértice de onde a aresta '{label}' sai >>> ")
+					arrival_vortex = input(f"Entre c/ a label do vértice de onde a aresta '{label}' chega  >>> ")
 					connected_vertices = starting_vortex, arrival_vortex
 				else:
 					vortex_1 = input(f"Entre c/ a label do primeiro vértice que está conectado a essa aresta >>> ")
@@ -85,7 +83,7 @@ class Menu:
 				try:
 					self.graph.add_edge(label, connected_vertices, weight)
 				except GraphException as e:
-					print("Erro ao adicionar arestas" + str(e) + ". Tente novamente.")
+					print("Erro ao adicionar arestas: " + str(e) + " Tente novamente.")
 					continue
 
 				print(f"Vértice '{label}' inserido com sucesso!")
@@ -96,6 +94,6 @@ class Menu:
 
 
 # Testing
-menu = Menu()
-menu.create_graph()
+# menu = Menu()
+# menu.create_graph()
 		
