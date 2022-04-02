@@ -39,9 +39,13 @@ class Graph:
 	
 		"""
 
+		non_existent_vertices = list()
 		for vertice_label in connected_vertices:
 			if not self.has_vertice(vertice_label):
-				raise GraphException(f"The edge is connected to a vertice that doesn't exist: (vertice label: '{vertice_label}')")
+				non_existent_vertices.append(vertice_label)
+
+		if non_existent_vertices:
+			raise GraphException(f"The edge is connected to one or more vertices that don't exist: (label(s): {non_existent_vertices})")
 
 		edge = Edge(label, self.is_directed)
 		try:

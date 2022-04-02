@@ -11,7 +11,14 @@ class Menu:
 		self.graph = None
 
 
-	def create_graph(self):
+	def show_main_menu(self):
+		self._create_graph_instance()
+		self._add_vertices()
+		self._add_edges()
+
+
+	def _create_graph_instance(self):
+		print("** Menu de Criação da Instância do Grafo **")
 		run = True
 
 		while run:
@@ -30,13 +37,10 @@ class Menu:
 			
 			self.graph = Graph(is_directed)
 			run = False
-		self._add_vertices()
-		self._add_edges()
-		print(self.graph)
 
 
 	def _add_vertices(self):
-		print("** Adição de Vértices **")
+		print("** Menu de Adição de Vértices **")
 
 		if self.graph is None:
 			print("Primeiro é preciso criar o grafo. Tente novamente.")
@@ -57,7 +61,7 @@ class Menu:
 				
 
 	def _add_edges(self):
-		print("** Adição de Arestas **")
+		print("** Menu de Adição de Arestas **")
 		if self.graph is None:
 			print("Primeiro é preciso criar o grafo. Tente novamente.")
 		else:
@@ -94,6 +98,6 @@ class Menu:
 
 
 # Testing
-# menu = Menu()
-# menu.create_graph()
+menu = Menu()
+menu.show_main_menu()
 		
