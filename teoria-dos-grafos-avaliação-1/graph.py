@@ -91,14 +91,47 @@ class Graph:
 
 		repr += "]"
 		return repr
+	
+	def dijkstra(self, starting_label, destination_label):
+		# (label_vertice, distancia, de_onde_veio, se_ta_aberto)
+		# Obs: ver se tem como ordenar vertices_list pelo valor do custo da tuple
+		vertices_list = list()
+		for label in self.vertices.keys():
+			if label == starting_label:
+				vertices_list.append([label, 0, label, True])  # [('a', 0, 'a', True), ('b', -1, None, True)]
+			else:
+				vertices_list.append([label, -1, None, True])
 
+		# Escolher o vértice de menor custo	
+		min_distance = 0
+		chosen_label = None
+		for vertice_tuple in vertices_list:
+			if (vertice_tuple[1] != -1) and (vertice_tuple[1] <= min_distance):
+				chosen_label = vertice_tuple[0]
+				vertice_tuple[3] = False
+
+		# **  Relaxar as arestas **
+		# Percorrer todas as arestas adjcentes ao vértice escolhido
+		for adjacent_edge in self.vertices[chosen_label].adjacent_edges:
+			connected_vortex_1, connected_vortex_2 = adjacent_edge.connected_vertices # ('a', 'b') 
+			label = connected_vortex_1 if (connected_vortex_1 != chosen_label) else connected_vortex_2
+			edge_weight = adjacent_edge.weight
+			current_tuple = None
+
+			for vertice_tuple in vertices_list:
+				if vertice_tuple[1] == label:
+					current_tuple = vertice_tuple
+
+			if current_tuple[2] == -1:
+				current_tuple[2] = edge_weight
 
 
 # Testing
-# graph = Graph()
-# graph.add_vortex('a')
-# graph.add_vortex('b')
-# graph.add_edge('1', ('a', 'b'), 10)
+graph = Graph()
+graph.add_vortex('a')
+graph.add_vortex('b')
+graph.add_edge('1', {'a', 'b'}, 10)
+graph.dijkstra('a', 'b')
 # graph.add_vortex('c')
 # graph.add_edge('2', ('b', 'c'))
 # print(graph)
