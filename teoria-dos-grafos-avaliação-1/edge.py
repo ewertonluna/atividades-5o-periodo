@@ -22,7 +22,7 @@ class Edge:
 	
 		"""
 
-		vertices_validation_message = self.get_vertices_validation_message(vertices)
+		vertices_validation_message = self._get_vertices_validation_message(vertices)
 		if vertices_validation_message:
 			raise EdgeException(vertices_validation_message)
 
@@ -33,7 +33,7 @@ class Edge:
 		self.connected_vertices = vertices	
 
 	
-	def get_vertices_validation_message(self, vertices: Union[Tuple[str, str], Set[str]]):
+	def _get_vertices_validation_message(self, vertices: Union[Tuple[str, str], Set[str]]):
 		"""
 		Checks if pair of vertices is a valid input and returns a message from it.
 
