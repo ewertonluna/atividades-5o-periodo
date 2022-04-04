@@ -1,7 +1,5 @@
 from edge_exception import EdgeException
 from graph import Graph
-from vortex import Vortex
-from edge import Edge
 from graph_exception import GraphException
 
 
