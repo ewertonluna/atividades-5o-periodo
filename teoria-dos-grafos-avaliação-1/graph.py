@@ -98,26 +98,28 @@ class Graph:
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
 		dijkstra_data = dict()
+		infinity = float("inf")
+
 		for label in self.vertices.keys():
 			if label == start_label:
 				dijkstra_data[label] = {'cost': 0, 'previous_vortex': label, 'is_open': True}
 			else:
-				dijkstra_data[label] = {'cost': -1, 'previous_vortex': None, 'is_open': True}
+				dijkstra_data[label] = {'cost': infinity, 'previous_vortex': None, 'is_open': True}
 		
 		while self._has_open_vortex(dijkstra_data):
 			# Escolhendo o vértice de menor custo
-			i = 0
+			label_of_min_cost = None
+			min_cost = 0
 			for label in dijkstra_data.keys():
 				if dijkstra_data[label]['is_open']:
-					if i == 0:
+					if not label_of_min_cost and dijkstra_data[label]['cost'] != infinity:
 						label_of_min_cost = label	
 						min_cost = dijkstra_data[label]['cost']
 					else:
 						cost = dijkstra_data[label]['cost']
-						if cost <= min_cost and cost != -1:
+						if cost <= min_cost and cost != infinity:
 							label_of_min_cost = label	
 							min_cost = dijkstra_data[label]['cost']
-					i += 1
 
 			chosen_label = label_of_min_cost  # apenas renomeio a variável para ter um nome mais apropriado desse ponto em diante
 			dijkstra_data[chosen_label]['is_open'] = False  # Fecha o vértice
@@ -129,7 +131,7 @@ class Graph:
 				opposite_vortex_label = vortex_label_1 if (vortex_label_1 != chosen_label) else vortex_label_2  # pega label do vértice conectado ao vértice escolhido
 
 				if dijkstra_data[opposite_vortex_label]['is_open']:  # só faz o relaxamento se o vértice oposto estiver aberto
-					if dijkstra_data[opposite_vortex_label]['cost'] == -1:
+					if dijkstra_data[opposite_vortex_label]['cost'] == infinity:
 						dijkstra_data[opposite_vortex_label]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
 						dijkstra_data[opposite_vortex_label]['previous_vortex'] = chosen_label
 					else:
@@ -137,7 +139,7 @@ class Graph:
 							dijkstra_data[opposite_vortex_label]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
 							dijkstra_data[opposite_vortex_label]['previous_vortex'] = chosen_label
 
-			return dijkstra_data
+		return dijkstra_data
 
 
 	def _has_open_vortex(self, dijkstra_data) -> bool:
@@ -147,6 +149,15 @@ class Graph:
 				has_open_vortex = True
 				break
 		return has_open_vortex
+
+	
+	def _has_only_infinite_cost_vertices(self, dijkstra_data) -> bool:
+		has_only_infinite_cost_vertices = True
+		for value in dijkstra_data.values():
+			if value['cost'] != -1:
+				has_only_infinite_cost_vertices = False
+				break
+		return has_only_infinite_cost_vertices
 
 	
 # Teste para não direcionado
@@ -162,4 +173,4 @@ class Graph:
 # graph.add_edge('4', {'c', 'e'}, 4)
 # graph.add_edge('5', {'e', 'd'}, 3)
 # graph.add_edge('6', {'d', 'a'}, 3)
-# graph.dijkstra('b')
+# print(graph.dijkstra_for_non_directed('b'))
