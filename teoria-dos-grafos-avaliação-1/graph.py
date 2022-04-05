@@ -128,7 +128,7 @@ class Graph:
 
 				if dijkstra_data[opposite_vortex_label]['is_open']:  # só faz o relaxamento se o vértice oposto estiver aberto
 					if dijkstra_data[opposite_vortex_label]['cost'] == -1:
-						dijkstra_data[opposite_vortex_label]['cost'] = edge_weight
+						dijkstra_data[opposite_vortex_label]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
 						dijkstra_data[opposite_vortex_label]['previous_vortex'] = chosen_label
 					else:
 						if dijkstra_data[opposite_vortex_label]['cost'] >= edge_weight + dijkstra_data[chosen_label]['cost']:
