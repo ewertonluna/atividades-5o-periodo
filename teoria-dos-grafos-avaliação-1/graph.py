@@ -149,6 +149,15 @@ class Graph:
 		return has_open_vortex
 
 	
+	def _has_only_infinite_cost_vertices(self, dijkstra_data) -> bool:
+		has_only_infinite_cost_vertices = True
+		for value in dijkstra_data.values():
+			if value['cost'] != -1:
+				has_only_infinite_cost_vertices = False
+				break
+		return has_only_infinite_cost_vertices
+
+	
 # Teste para não direcionado
 # graph = Graph()
 # graph.add_vortex('a')
