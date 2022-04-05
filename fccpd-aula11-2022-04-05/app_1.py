@@ -8,5 +8,4 @@ app.config["DEBUG"] = True
 def show(fila):
 	return jsonify({'fila': fila})
 
-app.register_blueprint(bp)
 app.run()
