@@ -76,6 +76,7 @@ class Graph:
 
 		return vortex_label in self.vertices.keys()
 	
+
 	def __repr__(self) -> str:
 		repr = "Graph[\n" \
 			f"\tis_directed: {self.is_directed}\n" \
@@ -92,6 +93,7 @@ class Graph:
 		repr += "]"
 		return repr
 	
+
 	def dijkstra_for_non_directed(self, start_label):
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
@@ -160,4 +162,4 @@ class Graph:
 # graph.add_edge('4', {'c', 'e'}, 4)
 # graph.add_edge('5', {'e', 'd'}, 3)
 # graph.add_edge('6', {'d', 'a'}, 3)
-# graph.dijkstra('a', 'e')
+# graph.dijkstra('b')
