@@ -9,7 +9,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 # rota: /api/filas/prioridade
-@bp.route('/<fila>', methods=['POST'])
+@bp.route('/<fila>/', methods=['POST'])
 def gerar_ticket(fila):
 	if fila == 'normal':
 		json_data['senha_atual_normal'] += 1
@@ -25,7 +25,7 @@ def ver_situacao():
 	return jsonify(json_data)
 
 # rota: /api/filas/normal
-@bp.route('/<fila>', methods=['PUT'])
+@bp.route('/<fila>/', methods=['PUT'])
 def chamar_ticket(fila):
 	if fila == 'normal':
 		json_data['senha_atual_normal'] -= 1
