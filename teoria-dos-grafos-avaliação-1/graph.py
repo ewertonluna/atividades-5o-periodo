@@ -92,7 +92,7 @@ class Graph:
 		repr += "]"
 		return repr
 	
-	def dijkstra(self, start_label, destination_label):
+	def dijkstra_for_non_directed(self, start_label):
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
 		dijkstra_data = dict()
@@ -134,9 +134,9 @@ class Graph:
 						if dijkstra_data[opposite_vortex_label]['cost'] >= edge_weight + dijkstra_data[chosen_label]['cost']:
 							dijkstra_data[opposite_vortex_label]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
 							dijkstra_data[opposite_vortex_label]['previous_vortex'] = chosen_label
-			
-		print(dijkstra_data)
-						
+
+			return dijkstra_data
+
 
 	def _has_open_vortex(self, dijkstra_data) -> bool:
 		has_open_vortex = False
@@ -147,52 +147,17 @@ class Graph:
 		return has_open_vortex
 
 	
-	# def dijkstra(self, starting_label, destination_label):
-	# 	vertices_list = list()
-	# 	for label in self.vertices.keys():
-	# 		if label == starting_label:
-	# 			vertices_list.append([label, 0, label, True])  # [('a', 0, 'a', True), ('b', -1, None, True)]
-	# 		else:
-	# 			vertices_list.append([label, -1, None, True])
-
-	# 	# Escolher o vértice de menor custo	
-	# 	min_distance = 0
-	# 	chosen_label = None
-	# 	for vertice_tuple in vertices_list:
-	# 		if (vertice_tuple[1] != -1) and (vertice_tuple[1] <= min_distance):
-	# 			chosen_label = vertice_tuple[0]
-	# 			vertice_tuple[3] = False
-
-	# 	# **  Relaxar as arestas **
-	# 	# Percorrer todas as arestas adjcentes ao vértice escolhido
-	# 	for adjacent_edge in self.vertices[chosen_label].adjacent_edges:
-	# 		connected_vortex_1, connected_vortex_2 = adjacent_edge.connected_vertices # ('a', 'b') 
-	# 		label = connected_vortex_1 if (connected_vortex_1 != chosen_label) else connected_vortex_2
-	# 		edge_weight = adjacent_edge.weight
-	# 		current_tuple = None
- 
-	# 		for vertice_tuple in vertices_list:
-	# 			if vertice_tuple[1] == label:
-	# 				current_tuple = vertice_tuple
-
-	# 		if current_tuple[2] == -1:
-	# 			current_tuple[2] = edge_weight
-
-
-# Testing
-graph = Graph()
-graph.add_vortex('a')
-graph.add_vortex('b')
-graph.add_vortex('c')
-graph.add_vortex('d')
-graph.add_vortex('e')
-graph.add_edge('1', {'a', 'b'}, 10)
-graph.add_edge('2', {'b', 'c'}, 5)
-graph.add_edge('3', {'b', 'd'}, 2)
-graph.add_edge('4', {'c', 'e'}, 4)
-graph.add_edge('5', {'e', 'd'}, 3)
-graph.add_edge('6', {'d', 'a'}, 3)
-graph.dijkstra('a', 'e')
+# Teste para não direcionado
+# graph = Graph()
+# graph.add_vortex('a')
+# graph.add_vortex('b')
 # graph.add_vortex('c')
-# graph.add_edge('2', ('b', 'c'))
-# print(graph)
+# graph.add_vortex('d')
+# graph.add_vortex('e')
+# graph.add_edge('1', {'a', 'b'}, 10)
+# graph.add_edge('2', {'b', 'c'}, 5)
+# graph.add_edge('3', {'b', 'd'}, 2)
+# graph.add_edge('4', {'c', 'e'}, 4)
+# graph.add_edge('5', {'e', 'd'}, 3)
+# graph.add_edge('6', {'d', 'a'}, 3)
+# graph.dijkstra('a', 'e')
