@@ -94,7 +94,7 @@ class Graph:
 		return repr
 	
 
-	def dijkstra_for_non_directed(self, start_label):
+	def dijkstra_for_non_directed(self, start_label: str):
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
 		dijkstra_data = dict()
@@ -140,10 +140,67 @@ class Graph:
 							dijkstra_data[opposite_vortex_label]['previous_vortex'] = chosen_label
 
 		return dijkstra_data
+	
+
+	def dijkstra_for_directed(self, start_label: str):
+		# Inicializando os valores: 
+		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
+		dijkstra_data = dict()
+		infinity = float("inf")
+
+		for label in self.vertices.keys():
+			if label == start_label:
+				dijkstra_data[label] = {'cost': 0, 'previous_vortex': label, 'is_open': True}
+			else:
+				dijkstra_data[label] = {'cost': infinity, 'previous_vortex': None, 'is_open': True}
+		
+		while self._has_open_vortex(dijkstra_data):
+			# Escolhendo o vértice de menor custo
+			label_of_min_cost = None
+			min_cost = 0
+			if self._has_only_infinite_cost_vertices_opened(dijkstra_data):
+				for label in dijkstra_data.keys():
+					if dijkstra_data[label]['is_open']:
+						label_of_min_cost = label
+						min_cost = dijkstra_data[label]['cost']
+						break
+			else:
+				for label in dijkstra_data.keys():
+					if dijkstra_data[label]['is_open']:
+						if not label_of_min_cost and dijkstra_data[label]['cost'] != infinity:
+							label_of_min_cost = label	
+							min_cost = dijkstra_data[label]['cost']
+						else:
+							cost = dijkstra_data[label]['cost']
+							if cost <= min_cost and cost != infinity:
+								label_of_min_cost = label	
+								min_cost = dijkstra_data[label]['cost']
+
+			chosen_label = label_of_min_cost  # apenas renomeio a variável para ter um nome mais apropriado desse ponto em diante
+			dijkstra_data[chosen_label]['is_open'] = False  # Fecha o vértice
+
+			# Relaxando as arestas
+			for adjacent_edge in self.vertices[chosen_label].adjacent_edges.values():  # adjacent_edges -> {'1': Edge1, '2': Edge2}
+				edge_weight = adjacent_edge.weight
+				_, vortex_label_2 = adjacent_edge.connected_vertices  # connected_vertices -> ('a', 'b')
+
+				# só relaxa a aresta se ela estiver saindo do vértice escolhido:
+				if vortex_label_2 != chosen_label:
+					if dijkstra_data[vortex_label_2]['is_open']:  # só faz o relaxamento se o vértice oposto estiver aberto
+						if dijkstra_data[vortex_label_2]['cost'] == infinity:
+							dijkstra_data[vortex_label_2]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
+							dijkstra_data[vortex_label_2]['previous_vortex'] = chosen_label
+						else:
+							if dijkstra_data[vortex_label_2]['cost'] >= edge_weight + dijkstra_data[chosen_label]['cost']:
+								dijkstra_data[vortex_label_2]['cost'] = edge_weight + dijkstra_data[chosen_label]['cost']
+								dijkstra_data[vortex_label_2]['previous_vortex'] = chosen_label
+
+		return dijkstra_data
 
 
 	def _has_open_vortex(self, dijkstra_data) -> bool:
 		has_open_vortex = False
+
 		for value in dijkstra_data.values():
 			if value['is_open']:
 				has_open_vortex = True
@@ -151,26 +208,28 @@ class Graph:
 		return has_open_vortex
 
 	
-	def _has_only_infinite_cost_vertices(self, dijkstra_data) -> bool:
+	def _has_only_infinite_cost_vertices_opened(self, dijkstra_data) -> bool:
+		infinity = float("inf")
 		has_only_infinite_cost_vertices = True
+
 		for value in dijkstra_data.values():
-			if value['cost'] != -1:
+			if value['is_open'] and value['cost'] != infinity:
 				has_only_infinite_cost_vertices = False
 				break
 		return has_only_infinite_cost_vertices
 
 	
 # Teste para não direcionado
-# graph = Graph()
+# graph = Graph(True)
 # graph.add_vortex('a')
 # graph.add_vortex('b')
 # graph.add_vortex('c')
 # graph.add_vortex('d')
 # graph.add_vortex('e')
-# graph.add_edge('1', {'a', 'b'}, 10)
-# graph.add_edge('2', {'b', 'c'}, 5)
-# graph.add_edge('3', {'b', 'd'}, 2)
-# graph.add_edge('4', {'c', 'e'}, 4)
-# graph.add_edge('5', {'e', 'd'}, 3)
-# graph.add_edge('6', {'d', 'a'}, 3)
-# print(graph.dijkstra_for_non_directed('b'))
+# graph.add_edge('1', ('a', 'b'), 10)
+# graph.add_edge('2', ('c', 'b'), 5)
+# graph.add_edge('3', ('d', 'b'), 2)
+# graph.add_edge('4', ('e', 'c'), 4)
+# graph.add_edge('5', ('d', 'e'), 3)
+# graph.add_edge('6', ('a', 'd'), 3)
+# print(graph.dijkstra_for_directed('b'))
