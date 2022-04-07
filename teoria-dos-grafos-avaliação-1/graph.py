@@ -95,12 +95,43 @@ class Graph:
 	
 
 	def dijkstra(self, start_label: str):
+		"""
+		Performs dijkstra algorithm for a initial vortex returning the state of each vortex.
+
+		Parameters:
+		start_label (str): Label of the starting vortex 
+	
+		Returns:
+		dict: A dictionary containing information about the cost from starting at the initial vortex
+		to the vortex at that key. It also contains information of what is the previous vortex in the 
+		path to get to the vortex at that key.
+
+		For instance:
+		The initial state, starting from vortex a, would be the following:
+		dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': infinity, 'previous_vortex': None, 'is_open': True}}
+
+		The final state would be the following. Note that the cost to get to b would be 3 coming from a:
+		dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': 3, 'previous_vortex': 'a', 'is_open': True}}
+		"""
+
 		if self.is_directed:
 			return self._dijkstra_for_directed(start_label)
 		return self._dijkstra_for_non_directed(start_label)
 	
-	
+
 	def get_shortest_path(self, start_label: str, end_label: str):
+		"""
+		Gets a list representing the path from the start vortex to the end vortex.
+
+		Parameters:
+		start_label (str): Label of the starting vortex 
+		end_label (str): Label of the ending vortex 
+	
+		Returns:
+		list: A list of the vertices labels that describes the path. If there's no path to get to the
+		end vortex (infinite cost), returns an empty list.
+	
+		"""
 		infinity = float("inf")
 		dijkstra_data = self.dijkstra(start_label)
 		shortest_path = list()
