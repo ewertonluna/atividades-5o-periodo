@@ -94,7 +94,13 @@ class Graph:
 		return repr
 	
 
-	def dijkstra_for_non_directed(self, start_label: str):
+	def dijkstra(self, start_label: str):
+		if self.is_directed:
+			return self._dijkstra_for_directed(start_label)
+		return self._dijkstra_for_non_directed
+	
+
+	def _dijkstra_for_non_directed(self, start_label: str):
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
 		dijkstra_data = dict()
@@ -142,7 +148,7 @@ class Graph:
 		return dijkstra_data
 	
 
-	def dijkstra_for_directed(self, start_label: str):
+	def _dijkstra_for_directed(self, start_label: str):
 		# Inicializando os valores: 
 		# dijkstra_data = {'a': {'cost': 0, 'previous_vortex': 'a', 'is_open': True}, 'b': {'cost': -1, 'previous_vortex': None, 'is_open': True}}
 		dijkstra_data = dict()
@@ -219,8 +225,8 @@ class Graph:
 		return has_only_infinite_cost_vertices
 
 	
-# Teste para não direcionado
-# graph = Graph(True)
+# # teste para direcionado
+# graph = Graph()
 # graph.add_vortex('a')
 # graph.add_vortex('b')
 # graph.add_vortex('c')
@@ -232,4 +238,19 @@ class Graph:
 # graph.add_edge('4', ('e', 'c'), 4)
 # graph.add_edge('5', ('d', 'e'), 3)
 # graph.add_edge('6', ('a', 'd'), 3)
-# print(graph.dijkstra_for_directed('b'))
+# print(graph.dijkstra('b'))
+
+# # teste para não direcionado
+# graph = Graph()
+# graph.add_vortex('a')
+# graph.add_vortex('b')
+# graph.add_vortex('c')
+# graph.add_vortex('d')
+# graph.add_vortex('e')
+# graph.add_edge('1', {'a', 'b'}, 10)
+# graph.add_edge('2', {'c', 'b'}, 5)
+# graph.add_edge('3', {'d', 'b'}, 2)
+# graph.add_edge('4', {'e', 'c'}, 4)
+# graph.add_edge('5', {'d', 'e'}, 3)
+# graph.add_edge('6', {'a', 'd'}, 3)
+# print(graph.dijkstra('b'))
