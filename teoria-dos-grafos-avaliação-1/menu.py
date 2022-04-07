@@ -1,6 +1,8 @@
 from edge_exception import EdgeException
 from graph import Graph
 from graph_exception import GraphException
+from os import system, name
+from application_headers import main_header, subheader
 
 
 class Menu:
@@ -10,15 +12,48 @@ class Menu:
 
 
 	def show_main_menu(self):
-		self._create_graph_instance()
-		self._add_vertices()
-		self._add_edges()
+		menu_options = {
+			'1': self._add_vertices, 
+			'2': self._add_edges
+		}
+
+		run = True
+		while run:
+			self._clear()
+			print(main_header)
+			print(subheader)
+			print("Entre com a opção desejada [digite 'sair' p/ ir à adição de arestas]:")
+			print("1) Adicionar vértices")
+			print("2) Adicionar vértices")
+			print("3) Carregar grafo a partir das informações do arquivo 'grafo.txt'")
+			print("4) Ir para o menu de informações do grafo.")
+			option = input(">>> ")
+
+			if option == "sair":
+				break
+
+			if option not in menu_options.keys(): 
+				print("⚠️ OPÇÃO NÃO VÁLIDA. TENTE NOVAMENTE.️ ⚠")
+				input("Entre com qualquer tecla para continuar... ")
+				continue
+
+			menu_options[option]()
+	
+	
+	def _clear(self):
+		if name == 'nt':
+			system('cls')
+		else:
+			system('clear')
 
 
 	def _create_graph_instance(self):
+		self._clear()
+		print(main_header)
+		print(subheader)
 		print("** Menu de Criação da Instância do Grafo **")
-		run = True
 
+		run = True
 		while run:
 			print("Entre com o número da opção p/ dizer se o grafo é direcionado ou não-direcionado:")
 			print("1) Grafo direcionado")
@@ -26,22 +61,31 @@ class Menu:
 
 			option = input(">>> ")
 			if option != '1' and option != '2':
-				print('Opção não válida. Tente novamente.')
+				print('⚠️ Opção não válida. Tente novamente. ⚠')
+				input("Entre com qualquer tecla para continuar... ")
 				continue
 			
 			is_directed = False
 			if option == '1':
 				is_directed = True
-			
+
 			self.graph = Graph(is_directed)
+			print("Grafo criado com sucesso! \U0001F60A")
+			input("Entre com qualquer tecla para voltar ao menu inicial... ")
+
 			run = False
 
 
 	def _add_vertices(self):
+		self._clear()
+		print(main_header)
+		print(subheader)
 		print("** Menu de Adição de Vértices **")
 
 		if self.graph is None:
-			print("Primeiro é preciso criar o grafo. Tente novamente.")
+			print("⚠ O grafo precisa ser criado antes da adição dos vértices. ⚠")
+			input("Entre com qualquer tecla para ir ao Menu de Criação da Instância do Grafo... ")
+			self._create_graph_instance()
 		else:
 			run = True
 			while run:
@@ -53,15 +97,23 @@ class Menu:
 				try:
 					self.graph.add_vortex(label)
 				except GraphException as e:
-					print("Erro ao adicionar vértice " + str(e))
+					print("⚠ Erro ao adicionar vértice " + str(e))
+					input("Entre com qualquer tecla para continuar...")
 					continue
 				print(f"Vértice de label '{label}' adicionado com sucesso!")
 				
 
 	def _add_edges(self):
+		self._clear()
+		print(main_header)
+		print(subheader)
 		print("** Menu de Adição de Arestas **")
-		if self.graph is None:
-			print("Primeiro é preciso criar o grafo. Tente novamente.")
+
+		# TODO: concluir esse check da adição de arestas
+		if self.graph is None or len(self.graph.vertices) < 2:
+			print("⚠ O grafo precisa ser criado antes da adição dos vértices. ⚠")
+			input("Entre com qualquer tecla para ir ao Menu de Criação da Instância do Grafo... ")
+			self._create_graph_instance()
 		else:
 			run = True
 			while run:
@@ -85,10 +137,11 @@ class Menu:
 				try:
 					self.graph.add_edge(label, connected_vertices, weight)
 				except GraphException as e:
-					print("Erro ao adicionar arestas: " + str(e) + " Tente novamente.")
+					print("⚠ Erro ao adicionar arestas: " + str(e) + " Tente novamente. ⚠")
+					input("Entre com qualquer tecla para continuar...")
 					continue
 
-				print(f"Vértice '{label}' inserido com sucesso!")
+				print(f"Vértice '{label}' inserido com sucesso! \U0001F60A")
 
 				
 
@@ -96,6 +149,6 @@ class Menu:
 
 
 # Testing
-# menu = Menu()
-# menu.show_main_menu()
+menu = Menu()
+menu.show_main_menu()
 		
