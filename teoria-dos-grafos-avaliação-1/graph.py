@@ -99,6 +99,22 @@ class Graph:
 			return self._dijkstra_for_directed(start_label)
 		return self._dijkstra_for_non_directed(start_label)
 	
+	
+	def get_shortest_path(self, start_label: str, end_label: str):
+		infinity = float("inf")
+		dijkstra_data = self.dijkstra(start_label)
+		shortest_path = list()
+
+		current_label = end_label
+		while current_label != start_label and dijkstra_data[current_label]['cost'] != infinity:
+			shortest_path.append(current_label)
+			current_label = dijkstra_data[current_label]['previous_vortex']
+
+		if dijkstra_data[current_label]['cost'] != infinity:
+			shortest_path.append(current_label)
+
+		return shortest_path[::-1]
+	
 
 	def _dijkstra_for_non_directed(self, start_label: str):
 		# Inicializando os valores: 
@@ -224,9 +240,24 @@ class Graph:
 				break
 		return has_only_infinite_cost_vertices
 
+# teste para método que retorna o menor caminho
+# graph = Graph(True)
+# graph.add_vortex('a')
+# graph.add_vortex('b')
+# graph.add_vortex('c')
+# graph.add_vortex('d')
+# graph.add_vortex('e')
+# graph.add_edge('1', ('a', 'b'), 10)
+# graph.add_edge('2', ('b', 'c'), 5)
+# graph.add_edge('3', ('d', 'b'), 2)
+# graph.add_edge('4', ('e', 'c'), 4)
+# graph.add_edge('5', ('d', 'e'), 3)
+# graph.add_edge('6', ('a', 'd'), 3)
+# print(graph.get_shortest_path('a', 'c'))
+
 	
 # # teste para direcionado
-# graph = Graph()
+# graph = Graph(True)
 # graph.add_vortex('a')
 # graph.add_vortex('b')
 # graph.add_vortex('c')
@@ -236,7 +267,7 @@ class Graph:
 # graph.add_edge('2', ('c', 'b'), 5)
 # graph.add_edge('3', ('d', 'b'), 2)
 # graph.add_edge('4', ('e', 'c'), 4)
-# graph.add_edge('5', ('d', 'e'), 3)
+# graph.add_edge('5', ('e', 'd'), 3)
 # graph.add_edge('6', ('a', 'd'), 3)
 # print(graph.dijkstra('b'))
 
