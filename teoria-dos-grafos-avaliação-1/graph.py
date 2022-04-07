@@ -97,7 +97,7 @@ class Graph:
 	def dijkstra(self, start_label: str):
 		if self.is_directed:
 			return self._dijkstra_for_directed(start_label)
-		return self._dijkstra_for_non_directed
+		return self._dijkstra_for_non_directed(start_label)
 	
 
 	def _dijkstra_for_non_directed(self, start_label: str):
