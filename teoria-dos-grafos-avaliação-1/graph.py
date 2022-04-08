@@ -21,7 +21,7 @@ class Graph:
 		None
 	
 		"""
-
+		label = label.strip()
 		vortex = Vortex(label)
 		self.vertices[vortex.label] = vortex
 	
@@ -38,6 +38,8 @@ class Graph:
 		None
 	
 		"""
+
+		label = label.strip()
 
 		non_existent_vertices = list()
 		for vertice_label in connected_vertices:

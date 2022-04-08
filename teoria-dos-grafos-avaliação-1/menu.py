@@ -39,17 +39,6 @@ class Menu:
 			menu_options[option]()
 	
 	
-	def _clear(self):
-		if name == 'nt':
-			system('cls')
-		else:
-			system('clear')
-
-	def _clear_and_apply_headers(self):
-		self._clear()
-		print(main_header)
-		print(subheader)
-
 	def _create_graph_instance(self):
 		run = True
 		while run:
@@ -116,10 +105,9 @@ class Menu:
 			print(f"⚠ Quantidade de vértices atual: {num_of_vertices}. ⚠")
 			input("Entre com qualquer tecla para voltar ao Menu Principal... ")
 		else:
-			self._clear_and_apply_headers()
-
 			run = True
 			while run:
+				self._clear_and_apply_headers()
 				print("** MENU DE ADIÇÃO DE ARESTAS **")
 				label = input("Entre c/ a label da aresta [digite 'sair' p/ concluir] >>> ")
 
@@ -148,7 +136,18 @@ class Menu:
 				print(f"Vértice '{label}' inserido com sucesso! \U0001F60A")
 				input("Entre com qualquer tecla para continuar adicionando arestas... ")
 
-				
+
+	def _clear(self):
+		if name == 'nt':
+			system('cls')
+		else:
+			system('clear')
+
+
+	def _clear_and_apply_headers(self):
+		self._clear()
+		print(main_header)
+		print(subheader)
 
 
 

@@ -51,7 +51,7 @@ class Edge:
 		result = ""
 		
 		if len(vertices) != 2:
-			result += "Length of 'vertices' has to be exactly 2. "
+			result += "Length of 'vertices' has to be exactly 2 and the vertices must have different labels. "
 		elif self.is_directed and isinstance(vertices, set):
 			result += "The vertices need to be a tuple, not a set since the edge is directed. "
 		elif not self.is_directed and isinstance(vertices, tuple):
