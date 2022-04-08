@@ -2,7 +2,7 @@ from edge_exception import EdgeException
 from graph import Graph
 from graph_exception import GraphException
 from os import system, name
-from application_headers import main_header, subheader
+from application_headers import main_header, subheader, group_name_header
 
 
 class Menu:
