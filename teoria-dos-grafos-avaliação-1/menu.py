@@ -19,9 +19,7 @@ class Menu:
 
 		run = True
 		while run:
-			self._clear()
-			print(main_header)
-			print(subheader)
+			self._clear_and_apply_headers()
 			print("Entre com a opção desejada [digite 'sair' p/ ir à adição de arestas]:")
 			print("1) Adicionar vértices")
 			print("2) Adicionar vértices")
@@ -46,11 +44,13 @@ class Menu:
 		else:
 			system('clear')
 
-
-	def _create_graph_instance(self):
+	def _clear_and_apply_headers(self):
 		self._clear()
 		print(main_header)
 		print(subheader)
+
+	def _create_graph_instance(self):
+		self._clear_and_apply_headers()
 		print("** Menu de Criação da Instância do Grafo **")
 
 		run = True
@@ -77,9 +77,7 @@ class Menu:
 
 
 	def _add_vertices(self):
-		self._clear()
-		print(main_header)
-		print(subheader)
+		self._clear_and_apply_headers()
 		print("** Menu de Adição de Vértices **")
 
 		if self.graph is None:
@@ -104,19 +102,16 @@ class Menu:
 				
 
 	def _add_edges(self):
-		self._clear()
-		print(main_header)
-		print(subheader)
-		print("** Menu de Adição de Arestas **")
+		self._clear_and_apply_headers()
 
 		# TODO: concluir esse check da adição de arestas
 		if self.graph is None or len(self.graph.vertices) < 2:
-			print("⚠ O grafo precisa ser criado antes da adição dos vértices. ⚠")
-			input("Entre com qualquer tecla para ir ao Menu de Criação da Instância do Grafo... ")
-			self._create_graph_instance()
+			print("⚠ O grafo precisa ter pelo menos dois vértices para que uma aresta possa ser inserida. ⚠")
+			input("Entre com qualquer tecla para voltar ao Menu Principal... ")
 		else:
 			run = True
 			while run:
+				print("** Menu de Adição de Arestas **")
 				label = input("Entre c/ a label da aresta [digite 'sair' p/ concluir] >>> ")
 
 				if label.lower().strip() == 'sair':
