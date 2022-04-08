@@ -1,6 +1,5 @@
 
 import flask
-from flask import request, jsonify 
 from flask import Blueprint
 
 from fila_api import FilaAPI

@@ -13,10 +13,10 @@ app.config["DEBUG"] = True
 @app.route('/api/filas/<fila>/', methods=['POST'])
 def gerar_ticket(fila):
 	if fila == 'normal':
-		result.senha_atual_normal += 1	
+		result['senha_atual_normal'] += 1	
 		return jsonify({'mensagem': 'ticket gerado na lista de normal com sucesso'})
 	elif fila == 'prioridade':
-		result.senha_atual_normal += 1	
+		result['senha_atual_prioridade'] += 1	
 		return jsonify({'mensagem': 'ticket gerado na lista de prioridade com sucesso'})
 	return jsonify({'mensagem': 'a rota tem que ser /api/filas/normal ou /api/filas/prioridade'})
 
@@ -34,7 +34,7 @@ def chamar_ticket(fila):
 		result['senha_atual_normal'] -= 1	
 		return jsonify({'mensagem': 'ticket removido na lista de normal com sucesso'})
 	elif fila == 'prioridade':
-		result['senha_atual_normal'] -= 1	
+		result['senha_atual_prioridade'] -= 1	
 		return jsonify({'mensagem': 'ticket removido na lista de prioridade com sucesso'})
 	return jsonify({'mensagem': 'a rota tem que ser /api/filas/normal ou /api/filas/prioridade'})
 

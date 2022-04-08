@@ -1,5 +1,5 @@
 import flask
-from flask import request, jsonify 
+from flask import jsonify 
 from flask import Blueprint
 
 bp = Blueprint('blueprint', __name__, url_prefix='/api/filas')
