@@ -22,6 +22,9 @@ class Graph:
 	
 		"""
 		label = label.strip()
+		if not label:
+			raise GraphException("'label' value cannot be an empty string")
+
 		vortex = Vortex(label)
 		self.vertices[vortex.label] = vortex
 	
