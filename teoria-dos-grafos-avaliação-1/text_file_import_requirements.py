@@ -23,7 +23,7 @@ vi) Na 5a linha, também contendo separação por vírgula, informar os pesos da
     A quantidade de pesos precisa corresponder à quantidade de arestas informadas.
     Os valores precisam ser numéricos (int ou float)
     Ex.: 10,3.5,4.3,0
-    Obs: É permitido que a linha não contenha valores se, e somente se, a 3a e a 4a linhas não contiverem valores.
+    Obs: É permitido que a linha não contenha valores se, e somente se, a 3a linha não contiver valor.
 
 vi) Caso o arquivo não seja válido, o programa imprimirá uma mensagem explicando o porquê.
 

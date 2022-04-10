@@ -50,7 +50,7 @@ class GraphFileMapper:
 			'is_directed': is_directed,
 			'vertices_values': vertices_values,
 			'edge_label_values': edge_label_values,
-			'edges': edges,	
+			'connected_vertices': edges,	
 			'weight_values': weight_values,
 		}
 

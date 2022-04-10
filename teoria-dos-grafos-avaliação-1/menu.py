@@ -1,5 +1,3 @@
-from isort import file
-from edge_exception import EdgeException
 from graph import Graph
 from graph_file_mapper import GraphFileMapper
 from graph_exception import GraphException
@@ -154,14 +152,26 @@ class Menu:
 
 			if option.lower() == "sair":
 				break
+			if option != '1' and option != '2':
+				print('⚠️ OPÇÃO INVÁLIDA. TENTE NOVAMENTE ⚠')
+				input("Entre com qualquer tecla para continuar... ")
+				continue
 
 			if option == "1": 
+				self._clear_and_apply_headers()
 				file_path = input("Entre com o path absoluto do arquivo de texto a ser importado: ")
 				file_path = file_path.strip()
 				self._graph_file_mapper = GraphFileMapper(file_path)
 				try:
 					graph_values = self._graph_file_mapper.get_graph_values()
 					print("Informações importadas com sucesso! \U0001F60A")
+					graph = self._convert_file_info_into_graph(graph_values)
+					if graph:
+						self.graph = graph
+						print("Grafo gerado a partir do arquivo importado! \U0001F60A")
+					else:
+						print("Não foi possível gerar o grafo a partir do arquivo. Certifique-se que as informações do arquivo estão corretas e tente novamente.")
+					input("Entre com qualquer tecla para continuar... ")
 				except GraphFileMapperException as gfme:
 					print("⚠ Erro ao buscar informações do grafo pelo arquivo: " + str(gfme) + " ⚠")
 					input("Entre com qualquer tecla para continuar... ")
@@ -170,9 +180,8 @@ class Menu:
 					print("⚠ General Error: " + str(e) + " ⚠")
 					input("Entre com qualquer tecla para continuar... ")
 					continue
-				
 
-			elif option == "2":
+			if option == "2":
 				self._clear_and_apply_headers()
 				print("Entre com qualquer concluir a visualização dos requisitos...\n\n")
 				print(requirements)
@@ -181,11 +190,11 @@ class Menu:
 				continue
 	
 	
-	# TODO: Completar o método após fazer as mudanças necessárias em GraphFileMapper
 	def _convert_file_info_into_graph(self, graph_info: dict) -> Graph:
 		is_directed = graph_info['is_directed']
 		vertices_labels = graph_info['vertices_values']
-		edges = graph_info['edges']
+		edge_labels = graph_info['edge_label_values']
+		connected_vertices = graph_info['connected_vertices']
 		weight_values = graph_info['weight_values']
 		graph = Graph(is_directed)
 		try:
@@ -193,15 +202,23 @@ class Menu:
 				graph.add_vortex(label)
 			print(f"Vértices adicionados com sucesso! \U0001F60A")
 		except GraphException as e:
-			print("⚠ Erro ao adicionar vértice " + str(e))
-			input("Entre com qualquer tecla para continuar...")
+			print("⚠ Erro ao adicionar vértice " + str(e) + " ⚠")
+			input("Entre com qualquer tecla para continuar... ")
+			return None
 
 		try:
-			for connected_vertices in edges:
-				graph.add_vortex(label)
+			for i in range(0, len(edge_labels)):
+				label = edge_labels[i]
+				weight = weight_values[i]
+				pair_of_vertices = connected_vertices[i]
+				self.graph.add_edge(label, pair_of_vertices, weight)
+			print(f"Arestas adicionadas com sucesso! \U0001F60A")
 		except GraphException as e:
-			print("⚠ Erro ao adicionar vértice " + str(e))
-			input("Entre com qualquer tecla para continuar...")
+			print("⚠ Erro ao adicionar arestas " + str(e) + " ⚠")
+			input("Entre com qualquer tecla para continuar... ")
+			return None
+		
+		return graph
 
 
 	def _clear(self):
