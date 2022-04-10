@@ -20,6 +20,7 @@ class GraphFileMapper:
 
 
 	# Could use some refactoring :)
+	#TODO: Refatorar para pegar valores das 5 linhas
 	def get_graph_values(self):
 		validation_message = self._get_validation_message(self.file_path)
 		if validation_message:
