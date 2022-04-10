@@ -13,8 +13,8 @@ class Menu:
 
 	def show_main_menu(self):
 		menu_options = {
-			'1': self._add_vertices, 
-			'2': self._add_edges
+			'1': self._show_add_vertices_menu, 
+			'2': self._show_add_edges_menu
 		}
 
 		run = True
@@ -24,7 +24,7 @@ class Menu:
 			print("Entre com a opção desejada [digite 'sair' terminar o programa]")
 			print("1) Adicionar vértices")
 			print("2) Adicionar arestas")
-			print("3) Carregar grafo a partir das informações do arquivo 'grafo.txt'")
+			print("3) Carregar grafo a partir das informações de um arquivo")
 			print("4) Ir para o Menu de Informações do Grafo.")
 			option = input(">>> ")
 
@@ -39,7 +39,7 @@ class Menu:
 			menu_options[option]()
 	
 	
-	def _create_graph_instance(self):
+	def _show_create_graph_instance_menu(self):
 		run = True
 		while run:
 			self._clear_and_apply_headers()
@@ -63,16 +63,16 @@ class Menu:
 			input("Entre com qualquer tecla para ser encaminhado(a) ao Menu de Adição de Vértices... ")
 			run = False
 
-		self._add_vertices()
+		self._show_add_vertices_menu()
 
 
-	def _add_vertices(self):
+	def _show_add_vertices_menu(self):
 		self._clear_and_apply_headers()
 
 		if self.graph is None:
 			print("⚠ O grafo precisa ser criado antes da adição dos vértices. ⚠")
 			input("Entre com qualquer tecla para ser encaminhado(a) ao Menu de Criação da Instância do Grafo... ")
-			self._create_graph_instance()
+			self._show_create_graph_instance_menu()
 		else:
 			run = True
 			while run:
@@ -94,7 +94,7 @@ class Menu:
 				input("Entre com qualquer tecla para continuar adicionando vértices... ")
 				
 
-	def _add_edges(self):
+	def _show_add_edges_menu(self):
 		self._clear_and_apply_headers()
 		num_of_vertices = 0 if self.graph is None else len(self.graph.vertices)
 		existent_vertices = [] if self.graph is None else list(self.graph.vertices.keys())
@@ -148,6 +148,7 @@ class Menu:
 		self._clear()
 		print(main_header)
 		print(subheader)
+		print(group_name_header)
 
 
 
