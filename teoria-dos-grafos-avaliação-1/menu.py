@@ -158,10 +158,11 @@ class Menu:
 				print("4) Ver se dois vértices são adjacentes ")
 				print("5) Visualizar grafo")
 				option = input(">>> ")
+				valid_options = {'1', '2', '3', '4', '5'}
 
 				if option == "sair":
 					break
-				if option != '1' and option != '2' and option != '3' and option != '4':
+				if option not in valid_options:
 					print('⚠️ OPÇÃO INVÁLIDA. TENTE NOVAMENTE ⚠')
 					input("Entre com qualquer tecla para continuar... ")
 					continue

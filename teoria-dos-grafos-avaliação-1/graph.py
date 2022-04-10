@@ -192,13 +192,13 @@ class Graph:
 		if not self.has_vertice(vortex_label):
 			raise GraphException("The vertice must exist.")
 
-		adjacent_vertices = list() 
+		adjacent_vertices = set() 
 		vortex = self.vertices[vortex_label]
 		adjacent_edges = vortex.adjacent_edges
 		for edge in adjacent_edges.values():
 			vortex_1, vortex_2 = edge.connected_vertices
 			adjacent_vortex = vortex_1 if vortex_1 != vortex_label else vortex_2
-			adjacent_vertices.append(adjacent_vortex)	
+			adjacent_vertices.add(adjacent_vortex)	
 		return adjacent_vertices
 	
 
