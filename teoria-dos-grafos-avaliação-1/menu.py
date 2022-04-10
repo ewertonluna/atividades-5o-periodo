@@ -1,3 +1,4 @@
+from re import I
 from graph import Graph
 from graph_file_mapper import GraphFileMapper
 from graph_exception import GraphException
@@ -155,6 +156,7 @@ class Menu:
 				print("2) Ver o menor caminho entre dois vértices")
 				print("3) Ver lista de vértices adjacentes de um vértice")
 				print("4) Ver se dois vértices são adjacentes ")
+				print("5) Visualizar grafo")
 				option = input(">>> ")
 
 				if option == "sair":
@@ -174,6 +176,7 @@ class Menu:
 					else:
 						print(f"Grau do vértice '{vortex_label}': {vortex_degree}")
 					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+
 				elif option == '2':
 					start_label = input("Entre com a label do vértice de origem: ")
 					end_label = input("Entre com a label do vértice de destino: ")
@@ -188,8 +191,33 @@ class Menu:
 						print("⚠ Erro ao buscar o menor caminho entre os vértices: " + str(ge) + " ⚠")
 						input("Entre com qualquer tecla para continuar... ")
 
+				elif option == '3':
+					vortex_label = input("Entre com a label do vértice: ")
+					try:
+						adjacent_vertices = self.graph.get_adjacent_vertices(vortex_label)
+						mensagem = f"Não há vértices adjacentes à '{vortex_label}'" if not adjacent_vertices else f"Lista de vértices adjacentes: {adjacent_vertices}"
+						print(mensagem)
+						input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+					except GraphException as ge:
+						print("⚠ Erro ao buscar list de vértices adjacentes: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
 
-	
+				elif option == '4':
+					vortex_label_1 = input("Entre com a label do primeiro vértice: ")
+					vortex_label_2 = input("Entre com a label do segundo vértice: ")
+					try:
+						are_vertices_adjacent = self.graph.are_vertices_adjacent(vortex_label_1, vortex_label_2)
+						mensagem = f"Vértices '{vortex_label_1}' e '{vortex_label_2}' são adjacentes." if are_vertices_adjacent else f"Vértices '{vortex_label_1}' e '{vortex_label_2}' não são adjacentes."
+						print(mensagem)
+						input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+					except GraphException as ge:
+						print("⚠ Erro ao ver se vértices são adjacentes: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+				
+				elif option == '5':
+					print(self.graph)
+					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+
 
 	def _show_import_graph_menu(self):
 		run = True

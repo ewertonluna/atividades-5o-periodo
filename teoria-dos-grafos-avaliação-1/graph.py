@@ -1,4 +1,4 @@
-from typing import Dict, Set, Tuple, Union
+from typing import Dict, List, Set, Tuple, Union
 from edge_exception import EdgeException
 from vortex import Vortex
 from edge import Edge
@@ -169,8 +169,8 @@ class Graph:
 	
 		"""
 
-		if not (self.has_vertice(start_label) and self.has_vertice(end_label)):
-			raise GraphException("The vertices must exist to find the shortest path.")
+		if not self.has_vertice(start_label) or not self.has_vertice(end_label):
+			raise GraphException("Both vertices must exist to find the shortest path.")
 
 		infinity = float("inf")
 		dijkstra_data = self.dijkstra(start_label)
@@ -186,6 +186,34 @@ class Graph:
 			shortest_path.append(current_label)
 
 		return (shortest_path[::-1], shortest_path_cost)
+
+	
+	def get_adjacent_vertices(self, vortex_label: str) -> List[str]:
+		if not self.has_vertice(vortex_label):
+			raise GraphException("The vertice must exist.")
+
+		adjacent_vertices = list() 
+		vortex = self.vertices[vortex_label]
+		adjacent_edges = vortex.adjacent_edges
+		for edge in adjacent_edges.values():
+			vortex_1, vortex_2 = edge.connected_vertices
+			adjacent_vortex = vortex_1 if vortex_1 != vortex_label else vortex_2
+			adjacent_vertices.append(adjacent_vortex)	
+		return adjacent_vertices
+	
+
+	def are_vertices_adjacent(self, vortex_label_1: str, vortex_label_2: str) -> bool:
+		if not self.has_vertice(vortex_label_1) or not self.has_vertice(vortex_label_2):
+			raise GraphException("Both vertices must exist in order to see if they are adjacent.")
+		are_adjacent = False
+		vortex = self.vertices[vortex_label_1]
+		adjacent_edges = vortex.adjacent_edges
+		for edge in adjacent_edges.values():
+			vortex_1, vortex_2 = edge.connected_vertices
+			if vortex_1 == vortex_label_2 or vortex_2 == vortex_label_2:
+				are_adjacent = True
+				break
+		return are_adjacent
 	
 
 	def _dijkstra_for_non_directed(self, start_label: str):
