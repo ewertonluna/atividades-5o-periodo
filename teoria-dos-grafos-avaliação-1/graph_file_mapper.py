@@ -6,6 +6,7 @@ from xmlrpc.client import boolean
 from graph_file_mapper_exception import GraphFileMapperException
 
 
+# TODO: Refatorar código para aceitar 5 linhas. A 4a linha é a de labels das arestas
 class GraphFileMapper:
 
 	def __init__(self, file_path: str):
@@ -19,15 +20,16 @@ class GraphFileMapper:
 
 
 	# Could use some refactoring :)
-	def get_graph_values(self, file_path: str):
-		validation_message = self._get_validation_message(file_path)
+	def get_graph_values(self):
+		validation_message = self._get_validation_message(self.file_path)
 		if validation_message:
 			raise GraphFileMapperException("Error getting graph values from file: " + validation_message)
 
 		directed_edge_pattern = "\(\s*\w\s*,\s*\w\s*\)"
 		undirected_edge_pattern = "\{\s*\w\s*,\s*\w\s*\}"
-		file = open(file_path, 'r')
+		file = open(self.file_path, 'r')
 		lines = file.readlines()
+		file.close()
 		first_line = lines[0].strip()
 		second_line = lines[1].strip()
 		third_line = lines[2].strip()	
@@ -91,7 +93,7 @@ class GraphFileMapper:
 		file = open(file_path, 'r')
 		lines = file.readlines()
 		file.close()
-		return True if len(lines) >= 4 else False
+		return True if len(lines) >= 5 else False
 		
 
 	def _is_first_line_valid(self, file_path: str):
@@ -113,6 +115,7 @@ class GraphFileMapper:
 		return True if len(vertices_values) >= 1 else False
 	
 
+	# TODO: refatorar para ser fourth_line
 	def _is_third_line_valid(self, file_path: str):
 		file = open(file_path, 'r')
 		lines = file.readlines()
@@ -126,6 +129,10 @@ class GraphFileMapper:
 
 		directed_edge_pattern = "^(\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*,?\s*)*$"
 		undirected_edge_pattern = "^(\{\s*(\w+)\s*,\s*(\w+)\s*\}\s*,?\s*)*$"
+		tuple_pattern = "\(\s*\w\s*,\s*\w\s*\)"
+		set_pattern = "\{\s*\w\s*,\s*\w\s*\}"
+		directed_edges = re.findall(tuple_pattern, third_line)
+		undirected_edges = re.findall(set_pattern, third_line)
 
 		# If first line is valid, the pattern will depend on its value
 		if self._is_first_line_valid(file_path):
@@ -133,12 +140,13 @@ class GraphFileMapper:
 				pattern = directed_edge_pattern
 			else: 
 				pattern = undirected_edge_pattern
-			return bool(re.match(pattern, third_line))
+			return bool(re.match(pattern, third_line)) and len(self._get_edge_label_values()) == self._get_number_of_connected_vertices_pairs()
 		# If first line is invalid, the pattern accepts either directed
 		else:
-			return bool(re.match(directed_edge_pattern, third_line)) or bool(re.match(undirected_edge_pattern, third_line))
+			return (bool(re.match(directed_edge_pattern, third_line)) or bool(re.match(undirected_edge_pattern, third_line))) and (len(self._get_edge_label_values()) == self._get_number_of_connected_vertices_pairs())
 
 
+	# TODO: refatorar para ser fifth_line
 	def _is_fourth_line_valid(self, file_path: str):
 		is_valid = True
 		file = open(file_path, 'r')
@@ -148,13 +156,23 @@ class GraphFileMapper:
 		weight_values = list(map(lambda weight: weight.strip(), weight_values))
 		weight_values = list(filter(lambda weight: weight != '', weight_values))
 
-		if len(weight_values) != self._get_number_of_edges(file_path):
+		if len(weight_values) != self._get_number_of_connected_vertices_pairs(file_path):
 			is_valid = False
 		for value in weight_values:
 			if not self._can_be_converted_to_float(value):
 				is_valid = False
 				break
 		return is_valid
+	
+
+	# TODO: refatorar parar ser third_line
+	def _is_fifth_line_valid(self, file_path: str) -> bool:
+		file = open(file_path, 'r')
+		lines = file.readlines()
+		file.close()
+		fifth_line = lines[4].strip()
+		return True if len(vertices_values) >= 1 else False
+
 				
 
 	def _get_first_line_value(self, file_path: str):
@@ -163,7 +181,8 @@ class GraphFileMapper:
 		first_line = lines[0].strip()
 		file.close()
 		return first_line
-	
+
+	# TODO: refatorar para ser _get_fourth_line_value	
 	def _get_third_line_value(self, file_path: str):
 		file = open(file_path, 'r')
 		lines = file.readlines()
@@ -172,8 +191,8 @@ class GraphFileMapper:
 		return third_line
 	
 	# Returns 0 if the third line is the not valid for the given graph or if the graph doesn't have edges.
-	def _get_number_of_edges(self, file_path: str):
-		third_line = self._get_third_line_value(file_path)
+	def _get_number_of_connected_vertices_pairs(self, file_path: str):
+		third_line = self._get_third_line_value(file_path)  # TODO: refatorar referências de thid_line para fourth_line
 		if not self._is_third_line_valid(file_path) or not third_line:
 			num_of_edges = 0
 		else:
@@ -213,6 +232,16 @@ class GraphFileMapper:
 
 		return cleaned_edges_values
 	
+	# TODO: refatorar par buscar na linha de index 2
+	def _get_edge_label_values(self, file_path: str) -> list:
+		file = open(file_path, 'r')
+		lines = file.readlines()
+		file.close()
+		fifth_line = lines[4].strip()
+		edge_labels = fifth_line.split(',')
+		edge_labels = set(map(lambda edge_label: edge_label.strip(), edge_labels))
+		edge_labels = set(filter(lambda edge_label: edge_label != '', edge_labels))
+		return edge__labels
 
 	def is_it_tuple_or_set(self, values: list) -> bool:
 		if values[0][0] == '(':

@@ -1,20 +1,25 @@
+from isort import file
 from edge_exception import EdgeException
 from graph import Graph
+from graph_file_mapper import GraphFileMapper
 from graph_exception import GraphException
 from os import system, name
 from application_headers import main_header, subheader, group_name_header
-
+from graph_file_mapper_exception import GraphFileMapperException
+from text_file_import_requirements import requirements
 
 class Menu:
 
 	def __init__(self):
 		self.graph = None
+		self._graph_file_mapper = None
 
 
 	def show_main_menu(self):
 		menu_options = {
 			'1': self._show_add_vertices_menu, 
-			'2': self._show_add_edges_menu
+			'2': self._show_add_edges_menu,
+			'3': self._show_import_graph_menu
 		}
 
 		run = True
@@ -24,7 +29,7 @@ class Menu:
 			print("Entre com a opção desejada [digite 'sair' terminar o programa]")
 			print("1) Adicionar vértices")
 			print("2) Adicionar arestas")
-			print("3) Carregar grafo a partir das informações de um arquivo")
+			print("3) Importar grafo a partir das informações de um arquivo")
 			print("4) Ir para o Menu de Informações do Grafo.")
 			option = input(">>> ")
 
@@ -135,6 +140,68 @@ class Menu:
 
 				print(f"Vértice '{label}' inserido com sucesso! \U0001F60A")
 				input("Entre com qualquer tecla para continuar adicionando arestas... ")
+	
+
+	def _show_import_graph_menu(self):
+		run = True
+		while run:
+			self._clear_and_apply_headers()
+			print("** MENU DE IMPORTAÇÃO DO GRAFO **")
+			print("Entre com a opção desejada [digite 'sair' para voltar ao Menu Principal]")
+			print("1) Importar grafo a partir de arquivo de texto")
+			print("2) Ver informações sobre requisitos os para o arquivo de texto")
+			option = input(">>> ")
+
+			if option.lower() == "sair":
+				break
+
+			if option == "1": 
+				file_path = input("Entre com o path absoluto do arquivo de texto a ser importado: ")
+				file_path = file_path.strip()
+				self._graph_file_mapper = GraphFileMapper(file_path)
+				try:
+					graph_values = self._graph_file_mapper.get_graph_values()
+					print("Informações importadas com sucesso! \U0001F60A")
+				except GraphFileMapperException as gfme:
+					print("⚠ Erro ao buscar informações do grafo pelo arquivo: " + str(gfme) + " ⚠")
+					input("Entre com qualquer tecla para continuar... ")
+					continue
+				except Exception as e:
+					print("⚠ General Error: " + str(e) + " ⚠")
+					input("Entre com qualquer tecla para continuar... ")
+					continue
+				
+
+			elif option == "2":
+				self._clear_and_apply_headers()
+				print("Entre com qualquer concluir a visualização dos requisitos...\n\n")
+				print(requirements)
+				print("\n\n")
+				input("Entre com qualquer concluir a visualização dos requisitos... ")
+				continue
+	
+	
+	# TODO: Completar o método após fazer as mudanças necessárias em GraphFileMapper
+	def _convert_file_info_into_graph(self, graph_info: dict) -> Graph:
+		is_directed = graph_info['is_directed']
+		vertices_labels = graph_info['vertices_values']
+		edges = graph_info['edges']
+		weight_values = graph_info['weight_values']
+		graph = Graph(is_directed)
+		try:
+			for label in vertices_labels:
+				graph.add_vortex(label)
+			print(f"Vértices adicionados com sucesso! \U0001F60A")
+		except GraphException as e:
+			print("⚠ Erro ao adicionar vértice " + str(e))
+			input("Entre com qualquer tecla para continuar...")
+
+		try:
+			for connected_vertices in edges:
+				graph.add_vortex(label)
+		except GraphException as e:
+			print("⚠ Erro ao adicionar vértice " + str(e))
+			input("Entre com qualquer tecla para continuar...")
 
 
 	def _clear(self):
