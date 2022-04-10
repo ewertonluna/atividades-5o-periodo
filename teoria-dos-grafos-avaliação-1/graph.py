@@ -80,6 +80,35 @@ class Graph:
 		"""
 
 		return vortex_label in self.vertices.keys()
+
+	
+	def get_vortex_degree(self, vortex_label: str) -> Union[int, Tuple[int, int]]:
+		if self.is_directed:
+			return self._get_vortex_degree_for_directed_graph(vortex_label)
+		return self._get_vortex_degree_for_undirected_graph(vortex_label)
+
+	
+	def _get_vortex_degree_for_undirected_graph(self, vortex_label: str) -> int:
+		if not self.has_vertice(vortex_label):
+			raise GraphException(f"Vortex of label '{vortex_label}' doesn't exist.")
+		vortex = self.vertices[vortex_label]
+		return len(vortex.adjacent_edges)
+		
+
+	def _get_vortex_degree_for_directed_graph(self, vortex_label: str) -> Tuple[int, int]:
+		if not self.has_vertice(vortex_label):
+			raise GraphException(f"Vortex of label '{vortex_label}' doesn't exist.")
+		vortex = self.vertices[vortex_label]
+		adjacent_edges = vortex.adjacent_edges
+		num_of_in_edges = 0
+		num_of_out_edges = 0
+		for edge in adjacent_edges.values():
+			start_vortex_label, _ = edge.connected_vertices
+			if start_vortex_label == vortex_label:
+				num_of_out_edges += 1
+			else:
+				num_of_in_edges += 1
+		return (num_of_in_edges, num_of_out_edges)
 	
 
 	def __repr__(self) -> str:
@@ -124,21 +153,28 @@ class Graph:
 		return self._dijkstra_for_non_directed(start_label)
 	
 
-	def get_shortest_path(self, start_label: str, end_label: str):
+	def get_shortest_path(self, start_label: str, end_label: str) -> Tuple[list, int]:
 		"""
-		Gets a list representing the path from the start vortex to the end vortex.
+		Gets a list and cost representing the path from the start vortex to the end vortex.
 
 		Parameters:
 		start_label (str): Label of the starting vortex 
 		end_label (str): Label of the ending vortex 
 	
 		Returns:
-		list: A list of the vertices labels that describes the path. If there's no path to get to the
+		tuple of:
+		- list: A list of the vertices labels that describes the path. If there's no path to get to the
 		end vortex (infinite cost), returns an empty list.
+		- cost: Cost of the shortest path.
 	
 		"""
+
+		if not (self.has_vertice(start_label) and self.has_vertice(end_label)):
+			raise GraphException("The vertices must exist to find the shortest path.")
+
 		infinity = float("inf")
 		dijkstra_data = self.dijkstra(start_label)
+		shortest_path_cost = dijkstra_data[end_label]['cost']
 		shortest_path = list()
 
 		current_label = end_label
@@ -149,7 +185,7 @@ class Graph:
 		if dijkstra_data[current_label]['cost'] != infinity:
 			shortest_path.append(current_label)
 
-		return shortest_path[::-1]
+		return (shortest_path[::-1], shortest_path_cost)
 	
 
 	def _dijkstra_for_non_directed(self, start_label: str):
@@ -275,6 +311,7 @@ class Graph:
 				has_only_infinite_cost_vertices = False
 				break
 		return has_only_infinite_cost_vertices
+
 
 # teste para método que retorna o menor caminho
 # graph = Graph(True)

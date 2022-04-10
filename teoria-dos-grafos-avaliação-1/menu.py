@@ -17,7 +17,8 @@ class Menu:
 		menu_options = {
 			'1': self._show_add_vertices_menu, 
 			'2': self._show_add_edges_menu,
-			'3': self._show_import_graph_menu
+			'3': self._show_graph_information_menu,
+			'4': self._show_import_graph_menu,
 		}
 
 		run = True
@@ -27,8 +28,8 @@ class Menu:
 			print("Entre com a opção desejada [digite 'sair' terminar o programa]")
 			print("1) Adicionar vértices")
 			print("2) Adicionar arestas")
-			print("3) Importar grafo a partir das informações de um arquivo")
-			print("4) Ir para o Menu de Informações do Grafo.")
+			print("3) Ir para o Menu de Informações do Grafo.")
+			print("4) Importar grafo a partir das informações de um arquivo")
 			option = input(">>> ")
 
 			if option == "sair":
@@ -102,7 +103,6 @@ class Menu:
 		num_of_vertices = 0 if self.graph is None else len(self.graph.vertices)
 		existent_vertices = [] if self.graph is None else list(self.graph.vertices.keys())
 
-		# TODO: concluir esse check da adição de arestas
 		if self.graph is None or len(self.graph.vertices) < 2:
 			print("⚠ O grafo precisa ter pelo menos dois vértices para que uma aresta possa ser inserida. ⚠")
 			print(f"⚠ Quantidade de vértices atual: {num_of_vertices}. ⚠")
@@ -138,6 +138,57 @@ class Menu:
 
 				print(f"Vértice '{label}' inserido com sucesso! \U0001F60A")
 				input("Entre com qualquer tecla para continuar adicionando arestas... ")
+
+
+	def _show_graph_information_menu(self):
+		self._clear_and_apply_headers()
+		if self.graph is None:
+			print("⚠ O grafo ainda não foi inicializado. P/ visualizar informações, crie o grafo e então tente novamente. ⚠")
+			input("Entre com qualquer tecla para voltar ao Menu Principal... ")
+		else:
+			run = True
+			while run:
+				self._clear_and_apply_headers()
+				print("** MENU DE INFORMAÇÕES DO GRAFO **")
+				print("Entre com a opção desejada [digite 'sair' para voltar ao Menu Principal]")
+				print("1) Ver o grau de um vértice")
+				print("2) Ver o menor caminho entre dois vértices")
+				print("3) Ver lista de vértices adjacentes de um vértice")
+				print("4) Ver se dois vértices são adjacentes ")
+				option = input(">>> ")
+
+				if option == "sair":
+					break
+				if option != '1' and option != '2' and option != '3' and option != '4':
+					print('⚠️ OPÇÃO INVÁLIDA. TENTE NOVAMENTE ⚠')
+					input("Entre com qualquer tecla para continuar... ")
+					continue
+				
+				if option == '1':
+					vortex_label = input("Entre com a label do vértice desejado: ")
+					vortex_degree = self.graph.get_vortex_degree(vortex_label)
+					if self.graph.is_directed:
+						in_degree, out_degree = vortex_degree
+						print(f"Grau de entrada do vértice '{vortex_label}': {in_degree}")
+						print(f"Grau de saída do vértice '{vortex_label}': {out_degree}")
+					else:
+						print(f"Grau do vértice '{vortex_label}': {vortex_degree}")
+					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+				elif option == '2':
+					start_label = input("Entre com a label do vértice de origem: ")
+					end_label = input("Entre com a label do vértice de destino: ")
+					try:
+						path_list, shortest_path_cost = self.graph.get_shortest_path(start_label, end_label)
+						path_string = self._convert_path_list_into_string(path_list) if path_list else f"Não há caminho possível partindo de '{start_label}' e chegando em '{end_label}'"
+						shortest_path_cost = "infinito" if str(shortest_path_cost) == str(float("inf")) else shortest_path_cost
+						print(f"Menor caminho: {path_string}")
+						print(f"Custo do menor caminho: {shortest_path_cost}")
+						input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+					except GraphException as ge:
+						print("⚠ Erro ao buscar o menor caminho entre os vértices: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+
+
 	
 
 	def _show_import_graph_menu(self):
@@ -168,7 +219,7 @@ class Menu:
 					graph = self._convert_file_info_into_graph(graph_values)
 					if graph:
 						self.graph = graph
-						print("Grafo gerado a partir do arquivo importado! \U0001F60A")
+						print(f"Grafo gerado a partir de arquivo '{file_path}'! \U0001F60A")
 					else:
 						print("Não foi possível gerar o grafo a partir do arquivo. Certifique-se que as informações do arquivo estão corretas e tente novamente.")
 					input("Entre com qualquer tecla para continuar... ")
@@ -211,7 +262,7 @@ class Menu:
 				label = edge_labels[i]
 				weight = weight_values[i]
 				pair_of_vertices = connected_vertices[i]
-				self.graph.add_edge(label, pair_of_vertices, weight)
+				graph.add_edge(label, pair_of_vertices, weight)
 			print(f"Arestas adicionadas com sucesso! \U0001F60A")
 		except GraphException as e:
 			print("⚠ Erro ao adicionar arestas " + str(e) + " ⚠")
@@ -219,6 +270,11 @@ class Menu:
 			return None
 		
 		return graph
+	
+
+	def _convert_path_list_into_string(self, path_list: list) -> str:
+		return " -> ".join(path_list)
+		
 
 
 	def _clear(self):

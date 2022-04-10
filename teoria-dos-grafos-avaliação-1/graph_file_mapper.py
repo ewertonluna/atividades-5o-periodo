@@ -6,7 +6,6 @@ from xmlrpc.client import boolean
 from graph_file_mapper_exception import GraphFileMapperException
 
 
-# TODO: Refatorar código para aceitar 5 linhas. A 4a linha é a de labels das arestas
 class GraphFileMapper:
 
 	def __init__(self, file_path: str):
@@ -36,8 +35,8 @@ class GraphFileMapper:
 		fifth_line = lines[4].strip()
 		is_directed = True if (first_line.lower() == 'direcionado') else False
 		vertices_values = second_line.split(',')
-		vertices_values = set(map(lambda vertice: vertice.strip(), vertices_values))
-		vertices_values = set(filter(lambda vertice: vertice != '', vertices_values))
+		vertices_values = list(map(lambda vertice: vertice.strip(), vertices_values))
+		vertices_values = list(filter(lambda vertice: vertice != '', vertices_values))
 		edge_label_values = self._get_edge_label_values(self.file_path)
 		pattern = directed_edge_pattern if first_line == 'direcionado' else undirected_edge_pattern
 		edges = re.findall(pattern, fourth_line)
@@ -109,8 +108,8 @@ class GraphFileMapper:
 		lines = file.readlines()
 		second_line = lines[1].strip()
 		vertices_values = second_line.split(',')
-		vertices_values = set(map(lambda vertice: vertice.strip(), vertices_values))
-		vertices_values = set(filter(lambda vertice: vertice != '', vertices_values))
+		vertices_values = list(map(lambda vertice: vertice.strip(), vertices_values))
+		vertices_values = list(filter(lambda vertice: vertice != '', vertices_values))
 		file.close()
 		return True if len(vertices_values) >= 1 else False
 
@@ -231,8 +230,8 @@ class GraphFileMapper:
 		file.close()
 		second_line = lines[2].strip()
 		edge_labels = second_line.split(',')
-		edge_labels = set(map(lambda edge_label: edge_label.strip(), edge_labels))
-		edge_labels = set(filter(lambda edge_label: edge_label != '', edge_labels))
+		edge_labels = list(map(lambda edge_label: edge_label.strip(), edge_labels))
+		edge_labels = list(filter(lambda edge_label: edge_label != '', edge_labels))
 		return edge_labels
 
 
