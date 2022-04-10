@@ -188,7 +188,7 @@ class Graph:
 		return (shortest_path[::-1], shortest_path_cost)
 
 	
-	def get_adjacent_vertices(self, vortex_label: str) -> List[str]:
+	def get_adjacent_vertices(self, vortex_label: str) -> Set[str]:
 		if not self.has_vertice(vortex_label):
 			raise GraphException("The vertice must exist.")
 
