@@ -157,8 +157,9 @@ class Menu:
 				print("3) Ver lista de vértices adjacentes de um vértice")
 				print("4) Ver se dois vértices são adjacentes ")
 				print("5) Visualizar grafo")
+				print("6) [Requisito Surpresa] Ver se vértice é pendente")
 				option = input(">>> ")
-				valid_options = {'1', '2', '3', '4', '5'}
+				valid_options = {'1', '2', '3', '4', '5', '6'}
 
 				if option == "sair":
 					break
@@ -169,7 +170,12 @@ class Menu:
 				
 				if option == '1':
 					vortex_label = input("Entre com a label do vértice desejado: ")
-					vortex_degree = self.graph.get_vortex_degree(vortex_label)
+					try:
+						vortex_degree = self.graph.get_vortex_degree(vortex_label)
+					except GraphException as ge:
+						print("⚠ Erro ao buscar o grau do vértice: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
 					if self.graph.is_directed:
 						in_degree, out_degree = vortex_degree
 						print(f"Grau de entrada do vértice '{vortex_label}': {in_degree}")
@@ -217,6 +223,23 @@ class Menu:
 				
 				elif option == '5':
 					print(self.graph)
+					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+
+				elif option == '6':
+					vortex_label = input("Entre com a label do vértice desejado: ")
+					try:
+						vortex_degree = self.graph.get_vortex_degree(vortex_label)
+					except GraphException as ge:
+						print("⚠ Erro ao buscar o grau do vértice: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
+					if self.graph.is_directed:
+						in_degree, out_degree = vortex_degree
+						message = f"O vértice '{vortex_label}' é pendente" if in_degree + out_degree == 1 else f"O vértice '{vortex_label}' não é pendente"
+						print(message)
+					else:
+						message = f"O vértice '{vortex_label}' é pendente" if vortex_degree == 1 else f"O vértice '{vortex_label}' não é pendente"
+						print(message)
 					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
 
 
