@@ -3,38 +3,27 @@ package xyz.rafaelri.transito;
 public class MeuControladorCruzamento implements ControladorCruzamento{
 
 	@Override
-	public void entrarHorizontal() {
-		synchronized (this) {
-			try {
-				wait();
-				sairHorizontal();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
+    public synchronized void entrarHorizontal() {
+        try {
+            wait();
+			sairHorizontal();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-		
-	}
+    @Override
+    public synchronized void sairHorizontal() {
+    }
 
-	@Override
-	synchronized public void sairHorizontal() {
-		notify();
-	}
-		
+    @Override
+    public synchronized void entrarVertical() {
+		sairVertical();
+    }
 
-	@Override
-	synchronized public void entrarVertical() {
-			try {
-				wait();
-				sairVertical();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-	}
-
-	@Override
-	synchronized public void sairVertical() {
-			notify();
-	}
+    @Override
+    public synchronized void sairVertical() {
+		notifyAll();
+    }
 	
 }
