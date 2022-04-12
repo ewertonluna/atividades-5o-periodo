@@ -24,7 +24,8 @@ class Vortex:
 		self.adjacent_edges[edge.label] = edge
 	
 	def __repr__(self):
-		return f'Vortex[label: "{self.label}", adjacent_edges: "{self.adjacent_edges}]"'
+		adjacent_edges_list = list(self.adjacent_edges.keys())
+		return f'Vortex[label: {self.label}, adjacent_edges: {adjacent_edges_list}]'
 
 
 

@@ -1,4 +1,3 @@
-from re import I
 from graph import Graph
 from graph_file_mapper import GraphFileMapper
 from graph_exception import GraphException
@@ -6,6 +5,7 @@ from os import system, name
 from application_headers import main_header, subheader, group_name_header
 from graph_file_mapper_exception import GraphFileMapperException
 from text_file_import_requirements import requirements
+from csv_importer import parse_csv_into_graph
 
 class Menu:
 
@@ -20,6 +20,7 @@ class Menu:
 			'2': self._show_add_edges_menu,
 			'3': self._show_graph_information_menu,
 			'4': self._show_import_graph_menu,
+			'5': self._show_import_from_csv_menu,
 		}
 
 		run = True
@@ -31,6 +32,7 @@ class Menu:
 			print("2) Adicionar arestas")
 			print("3) Ir para o Menu de Informações do Grafo.")
 			print("4) Importar grafo a partir das informações de um arquivo")
+			print("5) [Requisito Surpresa] Importar grafo a partir do CSV de Aeroportos do Brasil")
 			option = input(">>> ")
 
 			if option == "sair":
@@ -324,10 +326,24 @@ class Menu:
 		return graph
 	
 
+	def _show_import_from_csv_menu(self):
+		self._clear_and_apply_headers()
+		print("** MENU DE IMPORTAÇÃO DE CSV DE AEROPORTOS DO BRASIL**")
+		file_path = input("Entre com o path absoluto do arquivo .csv: ")
+
+		try:
+			graph = parse_csv_into_graph(file_path)
+			self.graph = graph
+			print("Grafo importado do CSV com sucesso! \U0001F60A")
+			input("Entre com qualquer tecla para continuar... ")
+		except Exception as e:
+			print("⚠ Erro ao fazer o parse do csv: " + str(e) + " ⚠")
+			input("Entre com qualquer tecla para voltar ao Menu principal... ")
+
+
 	def _convert_path_list_into_string(self, path_list: list) -> str:
 		return " -> ".join(path_list)
 		
-
 
 	def _clear(self):
 		if name == 'nt':
