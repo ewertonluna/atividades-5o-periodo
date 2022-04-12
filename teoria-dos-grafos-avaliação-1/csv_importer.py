@@ -14,7 +14,7 @@ from vortex import Vortex
 # 	is_directed: bool
 #	connected_vertices: Tuple[str, str]
 
-def parse_csv(file_path: str) -> Dict:
+def parse_csv_into_graph(file_path: str) -> Graph:
 	csv = open(file_path, 'r')
 	lines = csv.readlines()
 	is_directed = True
@@ -56,10 +56,13 @@ def parse_csv(file_path: str) -> Dict:
 		
 		edges[edge_label] = edge
 		i += 1
-	
-	return {'vertices': vertices, 'edges': edges}
+
+	graph = Graph(is_directed)	
+	graph.vertices = vertices
+	graph.edges = edges
+	return graph
 
 
 # Testing
-result = parse_csv("./planilha-aeroportos-brasil.csv")
-print(result['vertices']['BSB'])
+# graph = parse_csv_into_graph("./planilha-aeroportos-brasil.csv")
+# print(graph)

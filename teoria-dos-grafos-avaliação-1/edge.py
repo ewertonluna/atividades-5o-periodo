@@ -74,7 +74,7 @@ class Edge:
 
 
 	def __repr__(self):
-		return f'Edge[label: "{self.label}", weight: {self.weight}, is_directed: {self.is_directed}, connected_vertices: {self.connected_vertices}]'
+		return f'Edge[label: {self.label}, weight: {self.weight}, connected_vertices: {self.connected_vertices}]'
 
 
 
