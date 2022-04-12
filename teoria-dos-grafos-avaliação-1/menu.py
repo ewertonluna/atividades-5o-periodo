@@ -358,10 +358,3 @@ class Menu:
 		print(subheader)
 		print(group_name_header)
 
-
-
-
-# Testing
-menu = Menu()
-menu.show_main_menu()
-		
