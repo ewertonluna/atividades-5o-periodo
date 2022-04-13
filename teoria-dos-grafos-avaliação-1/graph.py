@@ -339,6 +339,33 @@ class Graph:
 				has_only_infinite_cost_vertices = False
 				break
 		return has_only_infinite_cost_vertices
+	
+
+	# def get_graph_degree(self):
+	# 	graph_degree = 0
+	# 	graph_in_degree = 0
+	# 	graph_out_degree = 0
+
+	# 	if not self.is_directed:
+	# 		for vortex_label in self.vertices.keys():
+	# 			graph_degree += self.get_vortex_degree(vortex_label)
+	# 	else:
+	# 		for vortex_label in self.vertices.keys():
+	# 			in_degree, out_degree = self.get_vortex_degree(vortex_label)
+	# 			graph_in_degree += in_degree
+	# 			graph_out_degree += out_degree
+	# 	if self.is_directed:
+	# 		return (graph_in_degree, graph_out_degree)
+	# 	return graph_degree
+	
+	def get_graph_order(self):
+		return len(self.vertices)
+	
+	def get_graph_size(self):
+		return len(self.edges)
+		
+			
+
 
 
 # teste para método que retorna o menor caminho

@@ -160,8 +160,10 @@ class Menu:
 				print("4) Ver se dois vértices são adjacentes ")
 				print("5) Visualizar grafo")
 				print("6) [Requisito Surpresa] Ver se vértice é pendente")
+				print("7) Ver a ordem do grafo")
+				print("8) Ver tamanho do grafo")
 				option = input(">>> ")
-				valid_options = {'1', '2', '3', '4', '5', '6'}
+				valid_options = {'1', '2', '3', '4', '5', '6', '7', '8'}
 
 				if option == "sair":
 					break
@@ -243,6 +245,36 @@ class Menu:
 						message = f"O vértice '{vortex_label}' é pendente" if vortex_degree == 1 else f"O vértice '{vortex_label}' não é pendente"
 						print(message)
 					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+
+				elif option == '7':
+					try:
+						graph_order = self.graph.get_graph_order()
+					except GraphException as ge:
+						print("⚠ Erro ao buscar o ordem do grafo: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
+					except Exception as e:
+						print("⚠ Erro ao buscar o ordem do grafo: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
+					print(f"Ordem do grafo: {graph_order}")
+					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+
+				elif option == '8':
+					try:
+						graph_size = self.graph.get_graph_size()
+					except GraphException as ge:
+						print("⚠ Erro ao buscar o tamanho do grafo: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
+					except Exception as e:
+						print("⚠ Erro ao buscar o tamanho do grafo: " + str(ge) + " ⚠")
+						input("Entre com qualquer tecla para continuar... ")
+						continue
+					print(f"O tamanho do grafo é: {graph_size}")
+					input("Entre com qualquer tecla para voltar ao Menu de Informações do Grafo... ")
+					pass
+
 
 
 	def _show_import_graph_menu(self):
