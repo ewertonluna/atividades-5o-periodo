@@ -1,0 +1,6 @@
+direcionado
+a, b, c, d, e, f, g, h, i, j
+1, 2, 3, 4, 5
+(b, c), (d, b), (c, d), (d, a), (c, b)
+5, 10, 3, 4, 8
+
