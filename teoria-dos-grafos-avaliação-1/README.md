@@ -29,13 +29,21 @@
     </ol>
     <br>
     <ul>
-        <li><h3 align="left"style="font-size:20px">Inserção por lote:</li>
+        <li><h3 align="left"style="font-size:20px">Inserção por lote através de arquivo padronizado:</li>
     </ul>
     <ol>
         <li>No menu inicial, digite '4'.</li>
         <li>Leia os requisitos e formatação correta do arquivo antes de importar o grafo digitando '2'.</li>
         <li>Agora digite '1' para e insira o path absoluto da localização do arquivo contendo o grafo.</li>
         <li>Caso o arquivo não esteja na formatação correta, a aplicação informará a linha que ocorreu o erro. Caso contrário seu grafo foi adicionado com sucesso!</li>
+    </ol>
+    <ul>
+        <li><h3 align="left"style="font-size:20px">Inserção por lote usando o arquivo CSV dos aeroportos:</li>
+    </ul>
+    <ol>
+        <li>No menu inicial, digite '5'.</li>
+        <li>Entre com "./aeroportos-do-brasil.csv" para usar o arquivo CSV contido dentro do diretório raiz do projeto</li>
+        <li>Caso não tenha havido erro no input, o CSV será importado e transformado em grafo com sucesso!</li>
     </ol>
     <br>
     <h3 align="left"style="font-size:25px">Visualização do grafo:</h3>
