@@ -21,6 +21,7 @@
     </ul>
     <ol>
         <li>No menu inicial, digite '1' para adicionar um vértice.</li>
+        <img src="imagens/Captura de Tela 2022-04-13 às 20.13.28.png">
         <li>Em seguida determine se o grafo é direcionado (digite '1') ou não direcionado (digite '2').</li>
         <li>Agora crie todos os vértices do seu grafo inserindo uma label por vez. Quando finalizar, digite 'sair'.</li>
         <li>De volta ao menu incial digite '2' para inserir as arestas do grafo.</li>
@@ -35,6 +36,7 @@
         <li>No menu inicial, digite '4'.</li>
         <li>Leia os requisitos e formatação correta do arquivo antes de importar o grafo digitando '2'.</li>
         <li>Agora digite '1' para e insira o path absoluto da localização do arquivo contendo o grafo.</li>
+        <img src="imagens\Captura de Tela 2022-04-13 às 20.13.43.png">
         <li>Caso o arquivo não esteja na formatação correta, a aplicação informará a linha que ocorreu o erro. Caso contrário seu grafo foi adicionado com sucesso!</li>
     </ol>
     <ul>
@@ -49,6 +51,7 @@
     <h3 align="left"style="font-size:25px">Visualização do grafo:</h3>
     <p>Para iniciar, digite '3' no menu principal.</p>
     <br>
+    <img src="imagens\Captura de Tela 2022-04-13 às 20.13.59.png">
     <ul>
         <li><h3 align="left"style="font-size:15px">Grau de um vértice:</li>
         <p>Digite '1' e em seguida a label do vértice que deseja saber o grau.</p>
