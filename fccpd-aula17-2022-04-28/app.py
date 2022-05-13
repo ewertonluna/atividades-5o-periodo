@@ -18,4 +18,4 @@ from  consumer import ler_msg
 # mensagem = input("Entre com uma mensagem: ")
 # escrever_msg(mensagem)
 
-ler_msg()
+# ler_msg()
