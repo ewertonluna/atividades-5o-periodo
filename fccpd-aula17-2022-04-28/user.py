@@ -102,6 +102,7 @@ class User:
 
 
 
+# Use cases:
 
 # user_1 = User('1')
 # user_2 = User('2')
