@@ -1,7 +1,7 @@
 # Grupo: Carolina Vasconcelos, Ewerton Luna e Mariana Coutinho
 
 ## Overview
-**Vídeo com a explicação do código e dos conceitos utilizados nesta implementação: [https://www.google.com](https://www.google.com)**<br><br>
+**Vídeo com a explicação do código e dos conceitos utilizados nesta implementação: [https://youtu.be/KB0GQgSlPn0](https://youtu.be/KB0GQgSlPn0)**<br><br>
 A classe User representa um usuário do sistema "zapzap".<br> 
 Uma instância desta classe pode enviar mensagens diretamente um usuário e também pode enviar mensagem
 para todos os usuários que fazem parte do sistema.<br><br>
