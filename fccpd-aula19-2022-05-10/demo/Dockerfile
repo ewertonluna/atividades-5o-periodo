@@ -4,7 +4,7 @@ ADD . /src/
 
 RUN cd /src && mvn package
 
-FROM java
+FROM openjdk
 
 EXPOSE 8080
 
